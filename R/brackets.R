@@ -1,11 +1,25 @@
-pass_brackets <- function (x, i, forward = TRUE) {
+reverse_brackets <- function(x) {
+  osquare <- gregexpr("[[]", x)
+  csquare <- gregexpr("[]]", x)
+  osquiggly <- gregexpr("[{]", x)
+  csquiggly <- gregexpr("[}]", x)
+  ocurved <- gregexpr("[(]", x)
+  ccurved <- gregexpr("[)]", x)
+  
+  regmatches(x, osquare) <- "]"
+  regmatches(x, csquare) <- "["
+  regmatches(x, osquiggly) <- "}"
+  regmatches(x, csquiggly) <- "{"
+  regmatches(x, ocurved) <- ")"
+  regmatches(x, ccurved) <- "("
+  
+  x
+}
+
+pass_brackets <- function (x, i) {
   nx <- nchar(x) 
-  if(!forward) {
-    x <- reverse_strings(x)
-    i <- nx - i + 1
-  }
   sc <- substr(x, i, i)
-  names(i) <- sc 
+  names(i) <- sc
   repeat {
     ii <- as.integer(regexpr("[][{}()]", substr(x, i + 1, nx)))
     if(ii == -1) {
@@ -24,10 +38,6 @@ pass_brackets <- function (x, i, forward = TRUE) {
       "(" = ")",
       stop("error"))) {
       names(i) <- paste0(names(i), ec)
-      if(!forward) {
-        i[1] <- nx - i + 1
-        names(i) <- reverse_strings(names(i))
-      }
       return (i)
     } else {
       stop("unmatched brackets")
