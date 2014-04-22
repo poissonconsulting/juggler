@@ -1,8 +1,8 @@
-\name{jg_chk}
-\alias{jg_chk}
+\name{jg_check}
+\alias{jg_check}
 \title{Check JAGS model code}
 \usage{
-jg_chk(x)
+jg_check(x)
 }
 \arguments{
   \item{x}{string of JAGS model code}

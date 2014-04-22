@@ -1,7 +1,7 @@
 export("jg_blk_names<-")
 export(jg_blk_names)
 export(jg_blks)
-export(jg_chk)
+export(jg_check)
 export(jg_dists)
 export(jg_funcs)
 export(jg_nblk)

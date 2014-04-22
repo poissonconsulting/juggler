@@ -27,7 +27,7 @@ jg_nnodes(x)
 jg_nnodes(x, indices = TRUE)
 jg_nnodes(x, "stochastic", indices = TRUE)
 jg_nnodes(x, "deterministic")
-print(jg_chk(x))
+print(jg_check(x))
 
 \dontrun{
 
@@ -48,10 +48,10 @@ data {
 jg_dists(x)
 jg_funcs(x)
 jg_nnodes(x)
-print(jg_chk(x))
+print(jg_check(x))
 }
 }
 \seealso{
-\code{\link{jg_chk}} and \code{\link{jg_dists}}
+\code{\link{jg_check}} and \code{\link{jg_dists}}
 }
 

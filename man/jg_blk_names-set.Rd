@@ -7,7 +7,7 @@ jg_blk_names(x) <- value
 \arguments{
   \item{x}{string of JAGS model code}
 
-  \item{names}{character vector of block names}
+  \item{value}{character vector of block names}
 }
 \value{
 Modified JAGS model code.

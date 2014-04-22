@@ -20,7 +20,7 @@ check_string("()")
 #' In addition, a unique warning is issued for each failed check.
 #' @seealso \code{\link{juggler}}
 #' @export
-jg_chk <- function (x) {
+jg_check <- function (x) {
   x <- check_string(x)
   
   flag <- TRUE
