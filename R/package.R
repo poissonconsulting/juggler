@@ -7,11 +7,11 @@
 #' @import assertthat
 #' @name juggler
 #' @aliases package-juggler juggler-package
-#' @seealso \code{\link{chk_jg}},
-#' \code{\link{jg_blocks}} and \code{\link{jg_parms}}.
+#' @seealso \code{\link{check_jags_code}} and
+#' \code{\link{jg_dists}}
 #' @examples
 #' 
-#' model_code1 <- "data {
+#' x <- "data {
 #'   Y2 <- Y * 2
 #' }  
 #' model {
@@ -25,22 +25,17 @@
 #'   }
 #' } "
 #'
-#' jg_blocks(model_code1)
-#' jg_nblocks(model_code1)
-#' jg_set_block(model_code1, "data")
-#' jg_set_block(model_code1, "model")
-#' is.matched_brackets(model_code1)
-#' jg_distributions(model_code1)
-#' jg_functions(model_code1)
-#' jg_parameters(model_code1)
-#' jg_parameters(model_code1, indices = TRUE)
-#' jg_parameters(model_code1, "stochastic", indices = TRUE)
-#' jg_parameters(model_code1, "deterministic")
-#' print(check_jags_model_code(model_code1))
+#' jg_dists(x)
+#' jg_funcs(x)
+#' jg_nnodes(x)
+#' jg_nnodes(x, indices = TRUE)
+#' jg_nnodes(x, "stochastic", indices = TRUE)
+#' jg_nnodes(x, "deterministic")
+#' print(check_jags_code(x))
 #'  
 #' \dontrun{ 
 #' 
-#' model_code2 <- "model2 {
+#' x <- "model2 {
 #' Y2 <- Y * 2
 #' }  
 #' data {
@@ -54,11 +49,10 @@
 #'   }
 #' } "
 #' 
-#' jg_blocks(model_code2)
-#' jg_distributions(model_code2)
-#' jg_functions(model_code2)
-#' jg_parameters(model_code2)
-#' print(check_jags_model_code(model_code2))
+#' jg_dists(x)
+#' jg_funcs(x)
+#' jg_nnodes(x)
+#' print(check_jags_code(x))
 #' }
 #'
 NULL

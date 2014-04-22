@@ -8,14 +8,17 @@ jg_dists(x)
   \item{x}{string of JAGS model code}
 }
 \value{
-Character vector of distributions.
+Sorted character vector of distributions that occur one or
+more times.
 }
 \description{
-Gets distributions in JAGS model code
+Gets distributions in JAGS model code. A distribution is
+any JAGS word between ~ and (. Where a JAGS word must start
+with a letter and can only contain letters, numbers, '.'
+and '_'.
 }
 \seealso{
 \code{\link{juggler}}, \code{\link{jg_funcs}},
-\code{\link{jg_parms}} \code{\link{jg_indices}} and
-\code{\link{jg_data}}
+\code{\link{jg_nnodes}}
 }
 

@@ -11,11 +11,13 @@ jg_funcs(x)
 Character vector of functions.
 }
 \description{
-Gets functions in JAGS model code
+Gets functions in JAGS model code A function is any JAGS
+word followed by a '(' that is not preceeded by a '~'.
+Where a JAGS word must start with a letter and can only
+contain letters, numbers, '.' and '_'.
 }
 \seealso{
-\code{\link{juggler}}, \code{\link{jg_dists}},
-\code{\link{jg_parms}} \code{\link{jg_indices}} and
-\code{\link{jg_data}}
+\code{\link{juggler}}, \code{\link{jg_dists}}, and
+\code{\link{jg_nnodes}}
 }
 

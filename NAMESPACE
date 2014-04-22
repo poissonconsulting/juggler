@@ -1,6 +1,5 @@
-export(chk_jg)
-export(jg_data)
+export(check_jags_code)
 export(jg_dists)
 export(jg_funcs)
-export(jg_parms)
+export(jg_nnodes)
 import(assertthat)

@@ -1,8 +1,8 @@
-\name{chk_jg}
-\alias{chk_jg}
+\name{check_jags_code}
+\alias{check_jags_code}
 \title{Check JAGS model code}
 \usage{
-chk_jg(x)
+check_jags_code(x)
 }
 \arguments{
   \item{x}{string of JAGS model code}
@@ -16,6 +16,6 @@ failed check.
 Checks JAGS model code
 }
 \seealso{
-\code{\link{juggler}} and \code{\link{is.matched_brackets}}
+\code{\link{juggler}}
 }
 

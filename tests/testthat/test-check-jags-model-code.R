@@ -1,6 +1,6 @@
-context("check_jags_model_code")
+context("check_jags_code")
 
-test_that("check_jags_model_code TRUE for valid code", {
+test_that("TRUE for valid code", {
   
 x <- "data {
   Y2 <- Y * 2
@@ -15,10 +15,10 @@ model {
   }
 } "
   
-  expect_that(check_jags_model_code(x), is_true())
+  expect_that(check_jags_code(x), is_true())
 })
 
-test_that("check_jags_model_code for invalid code", {
+test_that("warnings and FALSE for invalid code", {
   
 x <- "model2 {
   Y2 <- Y * 2
@@ -34,6 +34,6 @@ data {
   }
 } "
   
-  expect_warning(y <-check_jags_model_code(x))
+  expect_warning(y <- check_jags_code(x))
   expect_false(y)
 })

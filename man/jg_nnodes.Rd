@@ -1,8 +1,8 @@
-\name{jg_parms}
-\alias{jg_parms}
-\title{Get parameters in JAGS model code}
+\name{jg_nnodes}
+\alias{jg_nnodes}
+\title{Get named nodes in JAGS model code}
 \usage{
-jg_parms(x, type = "both", indices = FALSE)
+jg_nnodes(x, type = "both", indices = FALSE)
 }
 \arguments{
   \item{x}{string of JAGS model code}
@@ -16,11 +16,10 @@ jg_parms(x, type = "both", indices = FALSE)
 Character vector of indices.
 }
 \description{
-Gets parameters in JAGS model code
+Gets named nodes in JAGS model code
 }
 \seealso{
-\code{\link{juggler}}, \code{\link{jg_dists}},
-\code{\link{jg_funcs}}, \code{\link{jg_indices}} and
-\code{\link{jg_data}}
+\code{\link{juggler}}, \code{\link{jg_dists}}, and
+\code{\link{jg_funcs}}
 }
 
