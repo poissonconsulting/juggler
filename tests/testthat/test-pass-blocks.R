@@ -3,6 +3,8 @@ context("pass-blocks")
 test_that("pass_blocks passes correct blocks", {
 
   expect_equivalent(pass_blocks("model{}"), "{}")
+  expect_equivalent(pass_blocks("model {}"), "{}")
+  expect_equivalent(pass_blocks("model\n{}"), "{}")
   expect_equivalent(pass_blocks("model{}data{}"), c("{}","{}"))
   expect_equivalent(pass_blocks("model{} data{}"), c("{}","{}"))
   expect_equivalent(pass_blocks("model{{x <- bt[1:2]}} data{}"), c("{{x <- bt[1:2]}}","{}"))
