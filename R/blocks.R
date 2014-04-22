@@ -30,11 +30,11 @@ pass_blocks <- function (x, i) {
 #' @param x string of JAGS model code
 #' @return A named character vector where the names are the block names.
 #' Throws an error if the brackets are unbalanced.
-#' @seealso \code{\link{juggler}} and \code{\link{jg_blks}}
+#' @seealso \code{\link{juggler}} and \code{\link{jg_blocks}}
 #' @examples
-#' jg_blks("data {X <- 2} model { Y ~ dpois(X) }")
+#' jg_blocks("data {X <- 2} model { Y ~ dpois(X) }")
 #' @export
-jg_blks <- function (x) {
+jg_blocks <- function (x) {
   pass_blocks(x)
 }
 
@@ -45,12 +45,12 @@ jg_blks <- function (x) {
 #' 
 #' @param x string of JAGS model code
 #' @return Count of number of blocks.
-#' @seealso \code{\link{juggler}} and \code{\link{jg_blks}}
+#' @seealso \code{\link{juggler}} and \code{\link{jg_blocks}}
 #' @examples
 #' jg_nblk("data {X <- 2} model { Y ~ dpois(X) }")
 #' @export
 jg_nblk <- function (x) {
-  length(jg_blks(x))
+  length(jg_blocks(x))
 }
 
 #' Get block names in JAGS model code
@@ -59,12 +59,12 @@ jg_nblk <- function (x) {
 #' 
 #' @param x string of JAGS model code
 #' @return A character vector of block names in order occur in code.
-#' @seealso \code{\link{juggler}} and \code{\link{jg_blks}}
+#' @seealso \code{\link{juggler}} and \code{\link{jg_blocks}}
 #' @examples
-#' jg_blk_names("data {X <- 2} model { Y ~ dpois(X) }")
+#' jg_block_names("data {X <- 2} model { Y ~ dpois(X) }")
 #' @export
-jg_blk_names <- function (x) {
-  names(jg_blks(x))
+jg_block_names <- function (x) {
+  names(jg_blocks(x))
 }
 
 #' Set block names in JAGS model code
@@ -75,17 +75,17 @@ jg_blk_names <- function (x) {
 #' @param x string of JAGS model code
 #' @param value character vector of block names
 #' @return Modified JAGS model code.
-#' @seealso \code{\link{juggler}} and \code{\link{jg_blks}}
+#' @seealso \code{\link{juggler}} and \code{\link{jg_blocks}}
 #' @examples
 #'  x <- "data {X <- 2} model { Y ~ dpois(X) }"
-#' jg_blk_names(x) <- c("settings", "model")
+#' jg_block_names(x) <- c("settings", "model")
 #' print(x)
 #' @export
-"jg_blk_names<-" <- function (x, value) {
+"jg_block_names<-" <- function (x, value) {
   check_string(x)
   assert_that(is.character(value))
   
-  blocks <- jg_blks(x)
+  blocks <- jg_blocks(x)
   if(length(blocks) != length(value))
     stop("number of names does not match number of blocks")
   names(blocks) <- value

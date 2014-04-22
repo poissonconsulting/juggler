@@ -1,8 +1,8 @@
-\name{jg_blks}
-\alias{jg_blks}
+\name{jg_blocks}
+\alias{jg_blocks}
 \title{Parses blocks in JAGS model code}
 \usage{
-jg_blks(x)
+jg_blocks(x)
 }
 \arguments{
   \item{x}{string of JAGS model code}
@@ -16,9 +16,9 @@ Converts blocks in JAGS model code into a named character
 vector where the names are the block names.
 }
 \examples{
-jg_blks("data {X <- 2} model { Y ~ dpois(X) }")
+jg_blocks("data {X <- 2} model { Y ~ dpois(X) }")
 }
 \seealso{
-\code{\link{juggler}} and \code{\link{jg_blks}}
+\code{\link{juggler}} and \code{\link{jg_blocks}}
 }
 

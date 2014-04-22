@@ -18,6 +18,6 @@ if unbalanced brackets
 jg_nblk("data {X <- 2} model { Y ~ dpois(X) }")
 }
 \seealso{
-\code{\link{juggler}} and \code{\link{jg_blks}}
+\code{\link{juggler}} and \code{\link{jg_blocks}}
 }
 

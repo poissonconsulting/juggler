@@ -1,8 +1,8 @@
-\name{jg_blk_names<-}
-\alias{jg_blk_names<-}
+\name{jg_block_names<-}
+\alias{jg_block_names<-}
 \title{Set block names in JAGS model code}
 \usage{
-jg_blk_names(x) <- value
+jg_block_names(x) <- value
 }
 \arguments{
   \item{x}{string of JAGS model code}
@@ -17,10 +17,10 @@ Sets block names in JAGS model code. Throws an error if
 }
 \examples{
 x <- "data {X <- 2} model { Y ~ dpois(X) }"
-jg_blk_names(x) <- c("settings", "model")
+jg_block_names(x) <- c("settings", "model")
 print(x)
 }
 \seealso{
-\code{\link{juggler}} and \code{\link{jg_blks}}
+\code{\link{juggler}} and \code{\link{jg_blocks}}
 }
 

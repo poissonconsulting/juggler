@@ -1,8 +1,8 @@
-\name{jg_blk_names}
-\alias{jg_blk_names}
+\name{jg_block_names}
+\alias{jg_block_names}
 \title{Get block names in JAGS model code}
 \usage{
-jg_blk_names(x)
+jg_block_names(x)
 }
 \arguments{
   \item{x}{string of JAGS model code}
@@ -14,9 +14,9 @@ A character vector of block names in order occur in code.
 Get block names in JAGS model code
 }
 \examples{
-jg_blk_names("data {X <- 2} model { Y ~ dpois(X) }")
+jg_block_names("data {X <- 2} model { Y ~ dpois(X) }")
 }
 \seealso{
-\code{\link{juggler}} and \code{\link{jg_blks}}
+\code{\link{juggler}} and \code{\link{jg_blocks}}
 }
 
