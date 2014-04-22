@@ -7,7 +7,7 @@
 #' @import assertthat
 #' @name juggler
 #' @aliases package-juggler juggler-package
-#' @seealso \code{\link{check_jags_code}} and
+#' @seealso \code{\link{jg_chk}} and
 #' \code{\link{jg_dists}}
 #' @examples
 #' 
@@ -31,7 +31,7 @@
 #' jg_nnodes(x, indices = TRUE)
 #' jg_nnodes(x, "stochastic", indices = TRUE)
 #' jg_nnodes(x, "deterministic")
-#' print(check_jags_code(x))
+#' print(jg_chk(x))
 #'  
 #' \dontrun{ 
 #' 
@@ -52,7 +52,7 @@
 #' jg_dists(x)
 #' jg_funcs(x)
 #' jg_nnodes(x)
-#' print(check_jags_code(x))
+#' print(jg_chk(x))
 #' }
 #'
 NULL

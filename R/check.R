@@ -7,7 +7,7 @@
 #' In addition, a unique warning is issued for each failed check.
 #' @seealso \code{\link{juggler}}
 #' @export
-check_jags_code <- function (x) {
+jg_chk <- function (x) {
   assert_that(is.string(x))
   
   flag <- TRUE

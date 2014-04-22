@@ -1,4 +1,4 @@
-context("check_jags_code")
+context("jg_chk")
 
 test_that("TRUE for valid code", {
   
@@ -15,7 +15,7 @@ model {
   }
 } "
   
-  expect_that(check_jags_code(x), is_true())
+  expect_that(jg_chk(x), is_true())
 })
 
 test_that("warnings and FALSE for invalid code", {
@@ -34,6 +34,6 @@ data {
   }
 } "
   
-  expect_warning(y <- check_jags_code(x))
+  expect_warning(y <- jg_chk(x))
   expect_false(y)
 })
