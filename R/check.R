@@ -1,3 +1,16 @@
+check_string <- function (x) {
+  if(!is.character(x))
+    stop("x must be class character")
+  
+  if(!is.string(x)) {
+    warning("collapsing x into string")
+    x <- paste0(x, collapse = "\n")
+  }
+  x
+}
+
+check_string("()")
+
 #' Check JAGS model code
 #' 
 #' Checks JAGS model code
@@ -8,7 +21,7 @@
 #' @seealso \code{\link{juggler}}
 #' @export
 jg_chk <- function (x) {
-  assert_that(is.string(x))
+  check_string(x)
   
   flag <- TRUE
 
