@@ -24,7 +24,18 @@ jg_check <- function (x) {
   x <- check_string(x)
   
   flag <- TRUE
-
+  
+  bnames <- try(jg_block_names(x))
+  if(inherits(bnames, "try-error")) {
+    warning("unbalanced brackets")
+  } else if (!"model" %in% bnames) {
+    warning("no model block")
+  } else if (length(bnames) > 2) {
+    warning("more than two blocks")    
+  } else if (bnames[1] != "data") {
+    warning("first block name must be 'data'")
+  }
+  
   nodes <- jg_nnodes(x, indices = FALSE)
   if(identical(nodes, "character(0)")) {
     warning("no nodes")

@@ -20,7 +20,7 @@ model {
 
 test_that("warnings and FALSE for invalid code", {
   
-x <- "model2 {
+x <- "model {
   Y2 <- Y * 2
 }
 data {
