@@ -19,8 +19,8 @@ pass_brackets <- function (x, i) {
     if(ii == -1) {
       stop ("unmatched brackets")
     }
-    names(i) <- paste0(names(i),substr(x, i + 1, ii - 1)) 
     i[1] <- i[1] + ii[1]
+    names(i) <- paste0(names(i),substr(x, i - ii + 1, i - 1)) 
     ec <- substr(x, i, i)
     if(grepl("[[{(]", ec)) {
       ii <- pass_brackets(x, i)
