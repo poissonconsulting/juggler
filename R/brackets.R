@@ -16,8 +16,15 @@ reverse_brackets <- function(x) {
   x
 }
 
-pass_brackets <- function (x, i) {
+pass_brackets <- function (x, i, forward = TRUE) {
   nx <- nchar(x) 
+  if(missing(i)){
+    i <- ifelse(!forward, nx, 1)
+  }
+  if(!forward) {
+    x <- reverse_brackets(reverse_strings(x))
+    i <- nx - i + 1
+  }
   sc <- substr(x, i, i)
   names(i) <- sc
   repeat {
@@ -38,6 +45,10 @@ pass_brackets <- function (x, i) {
       "(" = ")",
       stop("error"))) {
       names(i) <- paste0(names(i), ec)
+      if(!forward) {
+        i[1] <- nx - i + 1        
+        names(i) <- reverse_brackets(reverse_strings(names(i)))
+      }
       return (i)
     } else {
       stop("unmatched brackets")
