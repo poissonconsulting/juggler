@@ -1,4 +1,4 @@
-context("pass_brackets")
+context("pass_brackets forward")
 
 test_that("pass_brackets works on paired brackets", {
   expect_equivalent(pass_brackets("()", 1), 2)
@@ -36,5 +36,17 @@ test_that("pass_brackets fails on unpaired brackets", {
 test_that("pass_brackets fails wrong starting point", {
   expect_error(pass_brackets("x()", 1))
   expect_error(pass_brackets("x()", 3))
+})
+
+context("pass_brackets reverse")
+
+test_that("pass_brackets works on paired brackets", {
+  expect_equivalent(pass_brackets("()", 2, forward = FALSE), 1)
+  expect_equivalent(pass_brackets("(())", 4, forward = FALSE), 1)
+  expect_equivalent(pass_brackets("((({})))",8, forward = FALSE), 1)
+  expect_equivalent(pass_brackets("()()", 2, forward = FALSE), 1)
+  expect_equivalent(pass_brackets("()()", 4, forward = FALSE), 3)
+  expect_equivalent(pass_brackets("([])()", 4, forward = FALSE), 1)
+  expect_equivalent(pass_brackets("())))))))", 2, forward = FALSE), 1)
 })
   
