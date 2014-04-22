@@ -1,0 +1,6 @@
+export(chk_jg)
+export(jg_data)
+export(jg_dists)
+export(jg_funcs)
+export(jg_parms)
+import(assertthat)

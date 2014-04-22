@@ -1,0 +1,18 @@
+Package: juggler
+Type: Package
+Title: Query and check JAGS model code
+Version: 0.0.1
+Date: 2014-04-20
+Authors@R: c(person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role
+    = c("aut", "cre")))
+Maintainer: Joe Thorley <joe@poissonconsulting.ca>
+Description: Simple querying and
+    checking of JAGS model code.
+Depends:
+    R (>= 3.0.3)
+Imports:
+    assertthat (>= 0.1)
+Suggests:
+    rjags,
+    testthat
+License: file LICENSE
