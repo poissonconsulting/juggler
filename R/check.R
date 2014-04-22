@@ -36,7 +36,7 @@ jg_check <- function (x) {
     warning("first block name must be 'data'")
   }
   
-  nodes <- jg_nnodes(x, indices = FALSE)
+  nodes <- jg_vnodes(x, indices = FALSE)
   if(identical(nodes, "character(0)")) {
     warning("no nodes")
     flag <- FALSE

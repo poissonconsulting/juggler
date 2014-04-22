@@ -18,6 +18,6 @@ contain letters, numbers, '.' and '_'.
 }
 \seealso{
 \code{\link{juggler}}, \code{\link{jg_dists}}, and
-\code{\link{jg_nnodes}}
+\code{\link{jg_vnodes}}
 }
 

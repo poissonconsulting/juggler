@@ -23,10 +23,10 @@ model {
 
 jg_dists(x)
 jg_funcs(x)
-jg_nnodes(x)
-jg_nnodes(x, indices = TRUE)
-jg_nnodes(x, "stochastic", indices = TRUE)
-jg_nnodes(x, "deterministic")
+jg_vnodes(x)
+jg_vnodes(x, indices = TRUE)
+jg_vnodes(x, "stochastic", indices = TRUE)
+jg_vnodes(x, "deterministic")
 print(jg_check(x))
 
 \dontrun{
