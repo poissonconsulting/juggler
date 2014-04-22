@@ -1,4 +1,27 @@
 # juggler
 
-R package of regular-expression based functions to provide 
-simply querying and checking of JAGS model code.
+## Overview
+
+R package for simple checking, querying and modification
+of JAGS model code.
+
+## Installation
+
+To install use the `devtools` package:
+
+    library(devtools)
+    install_github("poissonconsulting/juggler")
+    library(juggler)
+    ?juggler
+
+## Use
+
+The functions all take code for a single JAGS model in the form of string. If the 
+model code is in the form of a character vector then the functions first collapse the 
+vectors into a string using `paste0(x,sep="\n")`.
+
+The most useful function for most people is likely `jg_check()`. Run this on
+JAGS model code to perform some basic checks such as balanced brackets
+and valid block, distribution and function names. 
+It might save time if you have some code you want to check and no data to hand.
+

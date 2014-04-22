@@ -7,7 +7,7 @@
 #' @import assertthat
 #' @name juggler
 #' @aliases package-juggler juggler-package
-#' @seealso \code{\link{jg_check}} and
+#' @seealso \code{\link{jg_check}}, \code{\link{jg_blocks}} and
 #' \code{\link{jg_dists}}
 #' @examples
 #' 

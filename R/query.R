@@ -46,37 +46,53 @@ jg_funcs <- function (x) {
 
 #' Get variable nodes in JAGS model code
 #' 
-#' Gets variable nodes in JAGS model code
+#' Gets names of variable (as opposed to constant) named nodes in JAGS model code
 #' 
 #' @param x string of JAGS model code
 #' @param type string of node type. Must be 'stochastic', 'deterministic'
-#' or 'both' (the default).
+#' or 'both' (the default). A variable node is any word possibly 
 #' @param indices flag of whether to retain indices
-#' @return Character vector of unique sorted indices.
+#' @return Character vector of unique sorted variable node names
 #' @seealso \code{\link{juggler}}, \code{\link{jg_dists}}, 
 #' and \code{\link{jg_funcs}}
 #' @export
 jg_vnodes <- function (x, type = "both", indices = FALSE) {
   x <- check_string(x)
+  
   assert_that(is.string(type))
   assert_that(is.flag(indices))
   
   if(!type %in% c("both", "stochastic", "deterministic"))
     stop("type must be 'both', 'stochastic' or 'deterministic'")
   
-  matches <- gregexpr("(\\w+)((?<=\\w)|(\\s*([[][^[][]])))\\s*([~]|([<][-]))", x, perl = TRUE)
-  matches <- regmatches(x, matches)[[1]]
-  
   if(type == "stochastic") {
-    matches <- matches[grepl("~$", matches)]
-  } else if (type == "deterministic")
-    matches <- matches[grepl("<-$", matches)]
+    matches <- gregexpr("[])\\w.)](?=\\s*[~])", x, perl = TRUE)[[1]]
+  } else if(type == "deterministic") {
+    matches <- gregexpr("[])\\w.)](?=\\s*[<][-])", x, perl = TRUE)[[1]]   
+  } else
+    matches <- gregexpr("[])\\w.)](?=\\s*([~]|([<][-])))", x, perl = TRUE)[[1]]
+  if(matches[1] == -1)
+    return (character(0))
   
-  matches <- gsub("\\s*(~|<-)$", "", matches)
-  
-  if(!indices)
-    matches <- gsub("[[][^[][]]$", "", matches)
-  
-  matches <- sort(unique(matches))
-  matches
+  nodes <- character(0)
+  for (match in matches) {
+    index <- NULL
+    i <- gregexpr("\\S\\s*[)]$", substr(x, 1, match), perl = TRUE)[[1]]
+    if (i[1] != -1)
+      match <- i
+    if("]" == substr(x, match, match)) {
+      match <- pass_brackets(x, match, forward = FALSE)
+      index <- names(match)
+      match <- match - 1
+    }
+    i <- gregexpr("(^|(?<=[])(\\s]))[A-Za-z][\\w.]*(?=\\s*$)", substr(x, 1, match), perl = TRUE)[[1]]
+    if(i[1] != -1) {
+      node <- regmatches(substr(x, 1, match), i)
+      if(indices && !is.null(index))
+        node <- paste0(node, index)
+      nodes <- c(nodes, node)
+    }
+  }
+  nodes <- sort(unique(nodes))
+  nodes
 }

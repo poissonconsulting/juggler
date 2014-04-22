@@ -52,6 +52,7 @@ print(jg_check(x))
 }
 }
 \seealso{
-\code{\link{jg_check}} and \code{\link{jg_dists}}
+\code{\link{jg_check}}, \code{\link{jg_blocks}} and
+\code{\link{jg_dists}}
 }
 

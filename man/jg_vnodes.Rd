@@ -8,15 +8,17 @@ jg_vnodes(x, type = "both", indices = FALSE)
   \item{x}{string of JAGS model code}
 
   \item{type}{string of node type. Must be 'stochastic',
-  'deterministic' or 'both' (the default).}
+  'deterministic' or 'both' (the default). A variable node
+  is any word possibly}
 
   \item{indices}{flag of whether to retain indices}
 }
 \value{
-Character vector of unique sorted indices.
+Character vector of unique sorted variable node names
 }
 \description{
-Gets variable nodes in JAGS model code
+Gets names of variable (as opposed to constant) named nodes
+in JAGS model code
 }
 \seealso{
 \code{\link{juggler}}, \code{\link{jg_dists}}, and
