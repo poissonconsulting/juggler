@@ -21,7 +21,7 @@ check_string("()")
 #' @seealso \code{\link{juggler}}
 #' @export
 jg_chk <- function (x) {
-  check_string(x)
+  x <- check_string(x)
   
   flag <- TRUE
 

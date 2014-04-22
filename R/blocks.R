@@ -66,3 +66,33 @@ jg_nblk <- function (x) {
 jg_blk_names <- function (x) {
   names(jg_blks(x))
 }
+
+#' Set block names in JAGS model code
+#' 
+#' Sets block names in JAGS model code.
+#' Throws an error if 
+#' 
+#' @param x string of JAGS model code
+#' @param value character vector of block names
+#' @return Modified JAGS model code.
+#' @seealso \code{\link{juggler}} and \code{\link{jg_blks}}
+#' @examples
+#'  x <- "data {X <- 2} model { Y ~ dpois(X) }"
+#' jg_blk_names(x) <- c("settings", "model")
+#' print(x)
+#' @export
+"jg_blk_names<-" <- function (x, value) {
+  check_string(x)
+  assert_that(is.character(value))
+  
+  blocks <- jg_blks(x)
+  if(length(blocks) != length(value))
+    stop("number of names does not match number of blocks")
+  names(blocks) <- value
+  
+  x <- NULL
+  for(i in 1:length(blocks))
+    x <- paste(x, names(blocks[i]), blocks[i])
+  x <- sub("^ ", "", x)
+  return(x)
+}

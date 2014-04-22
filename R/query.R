@@ -13,7 +13,7 @@
 #' \code{\link{jg_funcs}}, \code{\link{jg_nnodes}}
 #' @export
 jg_dists <- function (x) {
-  check_string(x)
+  x <- check_string(x)
     
   matches <- gregexpr("(?<=~)\\s*[A-Za-z][\\w.]*(?=\\s*[(])", x, perl = TRUE)
   matches <- regmatches(x, matches)[[1]]
@@ -36,7 +36,7 @@ jg_dists <- function (x) {
 #' and \code{\link{jg_nnodes}}
 #' @export
 jg_funcs <- function (x) {
-  check_string(x)
+  x <- check_string(x)
   
   matches <- gregexpr("((?<![\\s\\w.~])|(?<![~])\\s+)[A-Za-z][\\w.]*(?=\\s*[(])", x, perl = TRUE)
   matches <- regmatches(x, matches)[[1]]
@@ -57,7 +57,7 @@ jg_funcs <- function (x) {
 #' and \code{\link{jg_funcs}}
 #' @export
 jg_nnodes <- function (x, type = "both", indices = FALSE) {
-  check_string(x)
+  x <- check_string(x)
   assert_that(is.string(type))
   assert_that(is.flag(indices))
   
