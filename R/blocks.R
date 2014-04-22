@@ -47,9 +47,9 @@ jg_blocks <- function (x) {
 #' @return Count of number of blocks.
 #' @seealso \code{\link{juggler}} and \code{\link{jg_blocks}}
 #' @examples
-#' jg_nblk("data {X <- 2} model { Y ~ dpois(X) }")
+#' jg_nblock("data {X <- 2} model { Y ~ dpois(X) }")
 #' @export
-jg_nblk <- function (x) {
+jg_nblock <- function (x) {
   length(jg_blocks(x))
 }
 

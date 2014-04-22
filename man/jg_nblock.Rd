@@ -1,8 +1,8 @@
-\name{jg_nblk}
-\alias{jg_nblk}
+\name{jg_nblock}
+\alias{jg_nblock}
 \title{Get number of blocks in JAGS model code}
 \usage{
-jg_nblk(x)
+jg_nblock(x)
 }
 \arguments{
   \item{x}{string of JAGS model code}
@@ -15,7 +15,7 @@ Gets number of blocks in JAGS model code. Throws an error
 if unbalanced brackets
 }
 \examples{
-jg_nblk("data {X <- 2} model { Y ~ dpois(X) }")
+jg_nblock("data {X <- 2} model { Y ~ dpois(X) }")
 }
 \seealso{
 \code{\link{juggler}} and \code{\link{jg_blocks}}
