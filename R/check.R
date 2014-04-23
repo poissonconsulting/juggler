@@ -30,7 +30,7 @@ jg_check <- function (x) {
     warning("no model block")
   } else if (length(bnames) > 2) {
     warning("more than two blocks")    
-  } else if (bnames[1] != "data") {
+  } else if (length(bnames) == 2 && bnames[1] != "data") {
     warning("first block name must be 'data'")
   }
   
