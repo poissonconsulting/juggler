@@ -27,6 +27,7 @@ jg_vnodes(x)
 jg_vnodes(x, indices = TRUE)
 jg_vnodes(x, "stochastic", indices = TRUE)
 jg_vnodes(x, "deterministic")
+jg_block_names(x)
 print(jg_check(x))
 
 \dontrun{
