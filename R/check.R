@@ -9,8 +9,6 @@ check_string <- function (x) {
   x
 }
 
-check_string("()")
-
 #' Check JAGS model code
 #' 
 #' Checks JAGS model code
@@ -21,7 +19,7 @@ check_string("()")
 #' @seealso \code{\link{juggler}}
 #' @export
 jg_check <- function (x) {
-  x <- check_string(x)
+  x <- jg_rm_comments(x)
   
   flag <- TRUE
   

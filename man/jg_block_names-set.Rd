@@ -14,6 +14,7 @@ Modified JAGS model code.
 }
 \description{
 Sets block names in JAGS model code. Throws an error if
+unbalanced brackets. Strips out comments.
 }
 \examples{
 x <- "data {X <- 2} model { Y ~ dpois(X) }"

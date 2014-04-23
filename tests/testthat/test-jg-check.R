@@ -6,7 +6,7 @@ x <- "data {
   Y2 <- Y * 2
 }
 model {
-  bIntercept ~ dnorm(0, 5^-2)
+  bIntercept ~ dnorm(0, 5^-2) #}}}}
   bX ~ dnorm(0, 5^-2)
   sY ~ dunif(0, 5)
   for(i in 1:length(Y)) {

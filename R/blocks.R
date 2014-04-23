@@ -35,6 +35,8 @@ pass_blocks <- function (x, i) {
 #' jg_blocks("data {X <- 2} model { Y ~ dpois(X) }")
 #' @export
 jg_blocks <- function (x) {
+  x <- jg_rm_comments(x)
+  
   pass_blocks(x)
 }
 
@@ -70,7 +72,8 @@ jg_block_names <- function (x) {
 #' Set block names in JAGS model code
 #' 
 #' Sets block names in JAGS model code.
-#' Throws an error if 
+#' Throws an error if unbalanced brackets.
+#' Strips out comments.
 #' 
 #' @param x string of JAGS model code
 #' @param value character vector of block names
@@ -82,10 +85,9 @@ jg_block_names <- function (x) {
 #' print(x)
 #' @export
 "jg_block_names<-" <- function (x, value) {
-  check_string(x)
   assert_that(is.character(value))
-  
   blocks <- jg_blocks(x)
+  
   if(length(blocks) != length(value))
     stop("number of names does not match number of blocks")
   names(blocks) <- value

@@ -1,0 +1,21 @@
+\name{jg_rm_comments}
+\alias{jg_rm_comments}
+\title{Remove comments in JAGS model code}
+\usage{
+jg_rm_comments(x)
+}
+\arguments{
+  \item{x}{string of JAGS model code}
+}
+\value{
+JAGS model code stripped of comments as a string.
+}
+\description{
+Removes comments in JAGS model code. A comment is
+everything from a # to the end of a line of the end of the
+string.
+}
+\seealso{
+\code{\link{juggler}}
+}
+
