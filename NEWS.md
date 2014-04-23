@@ -1,5 +1,9 @@
 # NEWS
 
+### juggler 0.1.1
+
+- fixed bug in `jg_check` where giving warning error if just model block
+
 ## juggler 0.1.0
 
 - added `jg_rm comments(x)`: removes comments and now called
