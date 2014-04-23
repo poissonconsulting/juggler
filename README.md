@@ -10,8 +10,9 @@ of JAGS model code.
 To install use the `devtools` package:
 
     library(devtools)
-    install_github("poissonconsulting/juggler")
+    install_github("poissonconsulting/juggler@v0.0.1")
     library(juggler)
+    ls("package:juggler")
     ?juggler
 
 ## Use
