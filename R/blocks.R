@@ -1,3 +1,10 @@
+paste_blocks <- function (x) {
+  y <- NULL
+  for(i in 1:length(x))
+    y <- paste(y, names(x[i]), x[i])
+  sub("^ ", "", y)
+}
+
 pass_blocks <- function (x, i) {
   if(missing(i))
     i <- 1
@@ -91,10 +98,5 @@ jg_block_names <- function (x) {
   if(length(blocks) != length(value))
     stop("number of names does not match number of blocks")
   names(blocks) <- value
-  
-  x <- NULL
-  for(i in 1:length(blocks))
-    x <- paste(x, names(blocks[i]), blocks[i])
-  x <- sub("^ ", "", x)
-  return(x)
+  paste_blocks(blocks)
 }

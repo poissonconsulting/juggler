@@ -8,7 +8,7 @@ jg_check(x, extended = FALSE)
   \item{x}{string of JAGS model code}
 
   \item{extended}{flag of whether to allow extended BUGS
-  language by default checks for strict BUGS language}
+  language}
 }
 \value{
 Invisible flag of whether JAGS model code passes certain
