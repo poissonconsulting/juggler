@@ -2,10 +2,13 @@
 \alias{jg_check}
 \title{Check JAGS model code}
 \usage{
-jg_check(x)
+jg_check(x, extended = FALSE)
 }
 \arguments{
   \item{x}{string of JAGS model code}
+
+  \item{extended}{flag of whether to allow extended BUGS
+  language by default checks for strict BUGS language}
 }
 \value{
 Invisible flag of whether JAGS model code passes certain

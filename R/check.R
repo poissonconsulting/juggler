@@ -3,7 +3,7 @@ check_string <- function (x) {
     stop("x must be class character")
   
   if(!is.string(x)) {
-    warning("collapsing x into string")
+    message("collapsing x into string")
     x <- paste0(x, collapse = "\n")
   }
   x
@@ -14,26 +14,50 @@ check_string <- function (x) {
 #' Checks JAGS model code
 #' 
 #' @param x string of JAGS model code
+#' @param extended flag of whether to allow extended BUGS language by default
+#' checks for strict BUGS language
 #' @return Invisible flag of whether JAGS model code passes certain checks.
 #' In addition, a unique warning is issued for each failed check.
 #' @seealso \code{\link{juggler}}
 #' @export
-jg_check <- function (x) {
+jg_check <- function (x, extended = FALSE) {
+  
+  assert_that(is.flag(extended) && noNA(extended))
   x <- jg_rm_comments(x)
   
   flag <- TRUE
   
   bnames <- try(jg_block_names(x))
-  if(inherits(bnames, "try-error")) {
+  if (inherits(bnames, "try-error")){
     warning("unbalanced brackets")
-  } else if (!"model" %in% bnames) {
+    return (FALSE)
+  } 
+  
+  if (!"model" %in% bnames) {
     warning("no model block")
-  } else if (length(bnames) > 2) {
-    warning("more than two blocks")    
-  } else if (length(bnames) == 2 && bnames[1] != "data") {
-    warning("first block name must be 'data'")
+    return (FALSE)
   }
   
+  if (any(duplicated(bnames))) {
+    warning("duplicated block names: ", paste_names(bnames[duplicated(bnames)]))
+    flag <- FALSE
+  }
+  
+  if(!extended) {
+    anames <- c("data", "model")
+  } else
+    anames <- c("set", "data", "model", "predict", "aggregate")
+  
+  if(any(!bnames %in% anames)) {
+    warning("invalid block names: ", paste_names(bnames[!bnames %in% anames]))
+    flag <- FALSE
+  } else {
+    fnames <- as.integer(factor(bnames, anames))
+    if(is.unsorted(fnames)) {
+      warning("block order must be: ", paste_names(anames))
+      flag <- FALSE
+    }
+  }
   nodes <- jg_vnodes(x, indices = FALSE)
   if(identical(nodes, "character(0)")) {
     warning("no nodes")
