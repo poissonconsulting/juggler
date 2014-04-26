@@ -19,12 +19,31 @@
 #' 
 #' In order for the current function to extend some JAGS code it
 #' requires the predictive and/or aggregative code segments to be identified
-#' line by line using a #' comment followed by one or more of m, p and a
-#' (the order is not important) to indicate to which 
-#' blocks the line of code belongs.
-#' Thus #' p indicates that the line belongs only in the predictive
-#' block while #' am results in the line occuring in both the aggregative
-#' and model blocks.
+#' line by line using a #' comment followed by one or more of the characters
+#' MPAmpa to indicate to which 
+#' blocks the line of code belongs. The syntax is as follows: the 
+#' first line of code, i.e., model { is always #' M (it doesn't require setting)
+#' which indicates that it and 
+#' all subsequent lines should only be included in the model block.
+#' This remains the case until the mode changes to for example #' MP which 
+#' indicates that the current line and all subsequent lines should be included
+#' in the model and predictive blocks unless the mode changes again to for example
+#' #' A to indicate inclusion in the aggregative code block only.
+#'  The only exception
+#' is if a line of code contains one or more of the lower case characters
+#' m, p and/or a. 
+#' In this situation the mode is temporarily ignored and just the lower case
+#' characters are used to determine block inclusion for the current line only. 
+#' It is worth noting that the block mode can be set and temporarily ignored in
+#' the same line. Thus #' Pm indicates change mode to predictive but only
+#' include the current line in the model block. The order of the characters 
+#' doesn't matter but they must occur immediately after #' with no preceeding
+#' comment characters and must not be 
+#' separated by any characters including whitespace. Duplicates are ignored
+#' and a warning is issued for any characters other than MPAmpa - the 
+#' extraneous characters are ignored. 
+#' 
+#' Its worth noting that the way juggler is currently
 #' 
 #' @param x string of JAGS model code
 #' @return String of model code in JAGS dialect of extended BUGS language
