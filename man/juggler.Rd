@@ -3,9 +3,25 @@
 \alias{juggler}
 \alias{juggler-package}
 \alias{package-juggler}
-\title{Juggler}
+\title{Juggler Package}
 \description{
-Simple querying and checking of JAGS model code.
+Check, manipulate and format JAGS model code.
+
+When presented with new code the first job is to use
+jg_check to see if the code has any problems which may be
+fixable using jg_fix or may require manually editing. Once
+checked code can be combined with code fragments using
+jg_juggle to produce multiple models. If marked up using
+the #' MPAmpa syntax models can then be extended using
+jg_extend to produce fast, flexible code for passing to
+jaggernaut and/or for formatting using jg_format for your
+reports. Alternatively jaggernaut does all this behind the
+scenes so just pass it your MPAmpa marked up JAGS model
+code and fragments and the data of interest and it let
+efficiently and flexibly manipulate your code and perform
+the analyses for you. The other functions are primarily
+exported for jaggernaut which imports the juggler package
+but you may find uses for them.
 }
 \examples{
 x <- "data {
@@ -53,7 +69,8 @@ print(jg_check(x))
 }
 }
 \seealso{
-\code{\link{jg_check}}, \code{\link{jg_blocks}} and
-\code{\link{jg_dists}}
+\code{\link{jg_check}}, \code{\link{jg_fix}},
+\code{\link{jg_juggle}}, \code{\link{jg_extend}} and
+\code{\link{jg_format}}.
 }
 

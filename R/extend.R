@@ -21,14 +21,17 @@
 #' requires the predictive and/or aggregative code segments to be identified
 #' line by line using a #' comment followed by one or more of the characters
 #' MPAmpa to indicate to which 
-#' blocks the line of code belongs. The syntax is as follows: the 
-#' first line of code, i.e., model { is always #' M (it doesn't require setting)
+#' blocks the line of code belongs.
+#' 
+#' The syntax is as follows: the 
+#' first line of code, i.e. model \{ is always #' M (it doesn't require setting)
 #' which indicates that it and 
 #' all subsequent lines should only be included in the model block.
 #' This remains the case until the mode changes to for example #' MP which 
 #' indicates that the current line and all subsequent lines should be included
 #' in the model and predictive blocks unless the mode changes again to for example
 #' #' A to indicate inclusion in the aggregative code block only.
+
 #'  The only exception
 #' is if a line of code contains one or more of the lower case characters
 #' m, p and/or a. 
@@ -37,16 +40,14 @@
 #' It is worth noting that the block mode can be set and temporarily ignored in
 #' the same line. Thus #' Pm indicates change mode to predictive but only
 #' include the current line in the model block. The order of the characters 
-#' doesn't matter but they must occur immediately after #' with no preceeding
-#' comment characters and must not be 
-#' separated by any characters including whitespace. Duplicates are ignored
+#' doesn't matter but they must form the first word after #' 
+#' which must be the first hash character on the line. Duplicates are ignored
 #' and a warning is issued for any characters other than MPAmpa - the 
 #' extraneous characters are ignored. 
 #' 
 #' @param x string of JAGS model code
 #' @return String of model code in JAGS dialect of extended BUGS language
-#' or FALSE if fails (in which case also throws an error).
-#' @seealso \code{\link{juggler}}
+#' or FALSE if fails (in which case also issues an error).
 #' @export
 jg_extend <- function (x) {
   
