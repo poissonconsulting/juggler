@@ -43,8 +43,6 @@
 #' and a warning is issued for any characters other than MPAmpa - the 
 #' extraneous characters are ignored. 
 #' 
-#' Its worth noting that the way juggler is currently
-#' 
 #' @param x string of JAGS model code
 #' @return String of model code in JAGS dialect of extended BUGS language
 #' or FALSE if fails (in which case also throws an error).
@@ -53,5 +51,3 @@
 jg_extend <- function (x) {
   
 }
-
-
