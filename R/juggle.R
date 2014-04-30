@@ -26,6 +26,8 @@
 #' fragments.  
 #'   
 #' @param x string of JAGS model code
+#' @param ... other arguments
+#' @param combine flag indicating whether to combine models
 #' @return Strings of model code in JAGS dialect of BUGS language
 #' or FALSE if fails (in which case also gives a warning).
 #' @seealso \code{\link{juggler}}

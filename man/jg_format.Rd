@@ -2,7 +2,7 @@
 \alias{jg_format}
 \title{Formats JAGS model code}
 \usage{
-jg_format(x, ..., combine = FALSE)
+jg_format(x)
 }
 \arguments{
   \item{x}{string of JAGS model code}

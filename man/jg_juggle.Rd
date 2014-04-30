@@ -6,6 +6,10 @@ jg_juggle(x, ..., combine = FALSE)
 }
 \arguments{
   \item{x}{string of JAGS model code}
+
+  \item{...}{other arguments}
+
+  \item{combine}{flag indicating whether to combine models}
 }
 \value{
 Strings of model code in JAGS dialect of BUGS language or

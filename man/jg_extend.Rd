@@ -9,7 +9,7 @@ jg_extend(x)
 }
 \value{
 String of model code in JAGS dialect of extended BUGS
-language or FALSE if fails (in which case also throws an
+language or FALSE if fails (in which case also issues an
 error).
 }
 \description{
@@ -55,10 +55,9 @@ only. It is worth noting that the block mode can be set and
 temporarily ignored in the same line. Thus #' Pm indicates
 change mode to predictive but only include the current line
 in the model block. The order of the characters doesn't
-matter but they must occur immediately after #' with no
-preceeding comment characters and must not be separated by
-any characters including whitespace. Duplicates are ignored
-and a warning is issued for any characters other than
-MPAmpa - the extraneous characters are ignored.
+matter but they must form the first word after #' which
+must be the first hash character on the line. Duplicates
+are ignored and a warning is issued for any characters
+other than MPAmpa - the extraneous characters are ignored.
 }
 

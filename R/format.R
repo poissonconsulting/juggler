@@ -11,6 +11,6 @@
 #' (in which case also gives a warning).
 #' @seealso \code{\link{juggler}}
 #' @export
-jg_format <- function (x, ..., combine = FALSE) {
+jg_format <- function (x) {
   
 }
