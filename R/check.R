@@ -38,7 +38,7 @@ jg_check <- function (x, extended = FALSE) {
   }
   
   if (any(duplicated(bnames))) {
-    warning("duplicated block names: ", paste_names(bnames[duplicated(bnames)]))
+    warning("duplicated block names: ", paste_names(bnames[duplicated(bnames)], TRUE))
     flag <- FALSE
   }
   
@@ -48,12 +48,12 @@ jg_check <- function (x, extended = FALSE) {
     anames <- c("data", "model", "predict", "aggregate")
   
   if(any(!bnames %in% anames)) {
-    warning("invalid block names: ", paste_names(bnames[!bnames %in% anames]))
+    warning("invalid block names: ", paste_names(bnames[!bnames %in% anames], TRUE))
     flag <- FALSE
   } else {
     fnames <- as.integer(factor(bnames, anames))
     if(is.unsorted(fnames)) {
-      warning("block order must be: ", paste_names(anames))
+      warning("block order must be: ", paste_names(anames, TRUE))
       flag <- FALSE
     }
   }
