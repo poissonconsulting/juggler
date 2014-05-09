@@ -16,6 +16,7 @@ reverse_brackets <- function(x) {
   x
 }
 
+#' @importFrom tulip reverse_strings
 pass_brackets <- function (x, i, forward = TRUE) {
   nx <- nchar(x) 
   if(missing(i)){

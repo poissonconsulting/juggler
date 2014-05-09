@@ -1,5 +1,9 @@
 # NEWS
 
+### juggler 0.1.2
+
+- moved `reverse_strings` and `paste_names` to `tulip` package which is now imported
+
 ### juggler 0.1.1
 
 - fixed bug in `jg_check` where giving warning error if just model block

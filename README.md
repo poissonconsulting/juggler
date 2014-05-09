@@ -7,13 +7,12 @@ of JAGS model code.
 
 ## Installation
 
-To install use the `devtools` package:
+To install the latest version:
 
     library(devtools)
-    install_github("poissonconsulting/juggler@v0.1.1")
+    install_github("poissonconsulting/tulip@v0.0.8")
+    install_github("poissonconsulting/juggler@v0.1.2")
     library(juggler)
-    ls("package:juggler")
-    ?juggler
 
 ## Use
 

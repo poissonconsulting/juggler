@@ -18,6 +18,7 @@ check_string <- function (x) {
 #' @return Invisible flag of whether JAGS model code passes certain checks.
 #' In addition, a unique warning is issued for each failed check.
 #' @seealso \code{\link{juggler}}
+#' @importFrom tulip paste_names
 #' @export
 jg_check <- function (x, extended = FALSE) {
   
