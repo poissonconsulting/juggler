@@ -1,4 +1,4 @@
 library(testthat)
 library(juggler)
 
-test_check("juggler")
+test_package("juggler")

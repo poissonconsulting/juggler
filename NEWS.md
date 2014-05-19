@@ -1,5 +1,10 @@
 # NEWS
 
+### juggler 0.1.3
+
+- fixed bug internal function `jags_functions` not returning all combinations of
+`p, d, q` and distributions
+
 ### juggler 0.1.2
 
 - moved `reverse_strings` and `paste_names` to `tulip` package which is now imported
