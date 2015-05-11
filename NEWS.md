@@ -1,5 +1,9 @@
 # NEWS
 
+### juggler 0.1.4
+
+- added `in` as function to deal with case where `for(i in (0+1):2)`
+
 ### juggler 0.1.3
 
 - fixed bug internal function `jags_functions` not returning all combinations of

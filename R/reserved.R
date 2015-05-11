@@ -106,7 +106,8 @@ jags_functions <- function () {
     "length",
     "dim",
     "for",
-    "T"))
+    "T", 
+    "in"))
 }
 
 jags_reserved_words <- function () {
