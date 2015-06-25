@@ -44,6 +44,14 @@ jg_funcs <- function (x) {
   sort(unique(matches))
 }
 
+line_number <- function (x, nchar) {
+  length(gregexpr("\n", substr(x, 1, nchar))[[1L]]) + 1
+}
+
+get_line <- function (x, line) {
+  strsplit(x,"\n")[[1]][line]
+}
+
 #' Get variable nodes in JAGS model code
 #' 
 #' Gets names of variable (as opposed to constant) named nodes in JAGS model code
@@ -52,16 +60,36 @@ jg_funcs <- function (x) {
 #' @param type string of node type. Must be 'stochastic', 'deterministic'
 #' or 'both' (the default). A variable node is any word possibly 
 #' @param indices flag of whether to retain indices
+#' @param comment A string defining the regular expression to use to 
+#' filter text from the comment for the node.
 #' @return Character vector of unique sorted variable node names
 #' @seealso \code{\link{juggler}}, \code{\link{jg_dists}}, 
 #' and \code{\link{jg_funcs}}
 #' @export
-jg_vnodes <- function (x, type = "both", indices = FALSE) {
-  x <- jg_rm_comments(x)
-  
+#' @examples
+#' model_code <- "data{
+#'    Y ~ dpois(2) 
+#' }
+#'
+#' model {
+#'
+#'  bLambda ~ dlnorm(0,10^-2) #$\\lamda_{beta}$
+#'  for (i in 1:length(x)) { x[i]~dpois(bLambda) 
+#'    b[i] ~dpois(1)
+#'    bc[i] <- b[i]
+#'  }
+#'  bd <- dpois(1, 1)
+#' }"
+#' jg_vnodes(model_code)
+#' 
+jg_vnodes <- function (x, type = "both", indices = FALSE, comment = "[$][^\n]+[$]") {
   assert_that(is.string(type))
-  assert_that(is.flag(indices))
+  assert_that(is.flag(indices) && noNA(indices))
+  assert_that(is.string(comment))
   
+  x_with_comments <- x
+  x <- jg_rm_comments(x)
+
   if(!type %in% c("both", "stochastic", "deterministic"))
     stop("type must be 'both', 'stochastic' or 'deterministic'")
   
@@ -88,11 +116,21 @@ jg_vnodes <- function (x, type = "both", indices = FALSE) {
     i <- gregexpr("(^|(?<=[])(\\s]))[A-Za-z][\\w.]*(?=\\s*$)", substr(x, 1, match), perl = TRUE)[[1]]
     if(i[1] != -1) {
       node <- regmatches(substr(x, 1, match), i)
+      line <- get_line(x_with_comments, line_number(x, match))
+      reg <- paste0("(.*", node, ")", "(.*[#].*)(", comment, ").*") 
+      if(grepl(reg, line, perl = TRUE)) {
+        node_comment <- sub(reg, "\\3", line, perl = TRUE)
+      } else 
+        node_comment <- node
+      
       if(indices && !is.null(index))
         node <- paste0(node, index)
+      
+      names(node) <- node_comment
       nodes <- c(nodes, node)
     }
   }
-  nodes <- sort(unique(nodes))
+  nodes <- nodes[!duplicated(nodes)]
+  nodes <- nodes[order(nodes)]
   nodes
 }

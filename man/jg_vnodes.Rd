@@ -4,7 +4,7 @@
 \alias{jg_vnodes}
 \title{Get variable nodes in JAGS model code}
 \usage{
-jg_vnodes(x, type = "both", indices = FALSE)
+jg_vnodes(x, type = "both", indices = FALSE, comment = "[$][^\\n]+[$]")
 }
 \arguments{
 \item{x}{string of JAGS model code}
@@ -13,12 +13,31 @@ jg_vnodes(x, type = "both", indices = FALSE)
 or 'both' (the default). A variable node is any word possibly}
 
 \item{indices}{flag of whether to retain indices}
+
+\item{comment}{A string defining the regular expression to use to
+filter text from the comment for the node.}
 }
 \value{
 Character vector of unique sorted variable node names
 }
 \description{
 Gets names of variable (as opposed to constant) named nodes in JAGS model code
+}
+\examples{
+model_code <- "data{
+   Y ~ dpois(2)
+}
+
+model {
+
+ bLambda ~ dlnorm(0,10^-2) #$\\\\lamda_{beta}$
+ for (i in 1:length(x)) { x[i]~dpois(bLambda)
+   b[i] ~dpois(1)
+   bc[i] <- b[i]
+ }
+ bd <- dpois(1, 1)
+}"
+jg_vnodes(model_code)
 }
 \seealso{
 \code{\link{juggler}}, \code{\link{jg_dists}},

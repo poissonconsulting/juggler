@@ -1,8 +1,8 @@
 Package: juggler
 Type: Package
 Title: Check, manipulate and format JAGS model code
-Version: 0.1.4
-Date: 2015-05-11
+Version: 0.1.5
+Date: 2015-06-25
 Authors@R: c(person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role
     = c("aut", "cre")))
 Maintainer: Joe Thorley <joe@poissonconsulting.ca>
