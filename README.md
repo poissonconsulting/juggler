@@ -10,8 +10,8 @@ of JAGS model code.
 To install the latest version:
 
     library(devtools)
-    install_github("poissonconsulting/tulip@v0.0.8")
-    install_github("poissonconsulting/juggler@v0.1.2")
+    install_github("poissonconsulting)
+    install_github("poissonconsulting)
     library(juggler)
 
 ## Use
