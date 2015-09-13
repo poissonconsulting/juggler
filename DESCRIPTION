@@ -1,20 +1,19 @@
 Package: juggler
-Type: Package
 Title: Check, manipulate and format JAGS model code
-Version: 0.1.5
-Date: 2015-06-25
-Authors@R: c(person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role
-    = c("aut", "cre")))
-Maintainer: Joe Thorley <joe@poissonconsulting.ca>
-Description: Checking, manipulation and
+Version: 0.1.5.9000
+Authors@R: c(
+    person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
+  )
+Description: Prototype checking, manipulation and
     formatting of JAGS model code in the BUGS
     and extended BUGS languages.
+URL: https://github.com/poissonconsulting/juggler
+License: MIT + file LICENSE
+LazyData: true
 Depends:
-    R (>= 3.1.0)
+    R (>= 3.2.2)
 Imports:
-    assertthat (>= 0.1),
+    assertthat,
     tulip (>= 0.0.8)
 Suggests:
     testthat
-License: file LICENSE
-BugReports: https://github.com/poissonconsulting/juggler/issues
