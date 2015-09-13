@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/poissonconsulting/juggler.svg)](https://travis-ci.org/poissonconsulting/juggler)
+
 # juggler
 
 ## Overview
@@ -7,11 +9,11 @@ of JAGS model code.
 
 ## Installation
 
-To install the latest version:
+To install and load the latest version:
 
     library(devtools)
-    install_github("poissonconsulting)
-    install_github("poissonconsulting)
+    install_github("poissonconsulting/tulip")
+    install_github("poissonconsulting/juggler")
     library(juggler)
 
 ## Use
