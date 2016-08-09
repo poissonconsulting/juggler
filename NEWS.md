@@ -1,5 +1,9 @@
 # NEWS
- 
+
+### juggler 0.1.6
+
+- update NAMESPACE
+
 ### juggler 0.1.5
 
 - added `comment = "[$][^\n]+[$]"` argument to `jg_nodes` to pull latex expression comments
