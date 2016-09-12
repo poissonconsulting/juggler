@@ -22,7 +22,7 @@
 #' find uses for them.
 #' 
 #' @docType package
-#' @import assertthat
+#' @import assertthat datacheckr
 #' @name juggler
 #' @aliases package-juggler juggler-package
 #' @seealso \code{\link{jg_check}}, \code{\link{jg_fix}},

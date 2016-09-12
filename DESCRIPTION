@@ -3,21 +3,22 @@ Title: Check, manipulate and format JAGS model code
 Version: 0.1.6
 Date: 2016-08-09
 Authors@R: c(
-    person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
-  )
+    person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre")),
+    person("Will", "Thorley", email = "will.thorley@gmail.com", role = c("aut")))
 Description: Prototype checking, manipulation and
     formatting of JAGS model code in the BUGS
     and extended BUGS languages.
-URL: https://github.com/poissonconsulting/juggler
 License: MIT + file LICENSE
-LazyData: true
 Depends:
     R (>= 3.2.2)
 Imports:
     assertthat,
-    tulip (>= 0.0.14)
+    datacheckr,
+    tulip (>= 0.0.14),
+    whisker
 Suggests:
     testthat
 Remotes:
     poissonconsulting/tulip
+LazyData: true
 RoxygenNote: 5.0.1
