@@ -12,20 +12,12 @@ R package for simple checking, querying and modification of JAGS model code.
 
 All the functions take code for a single JAGS model in the form of string. If the model code is in the form of a character vector then the functions first collapse the vectors into a string using `paste0(x,sep="\n")`. They then strip comments.
 
-The most useful function for most people is likely `jg_check()`. Run this on JAGS model code to perform some basic checks such as balanced brackets and valid block, distribution and function names. It might save time if you have some code you want to check and no data to hand.
-
-Installation
-------------
-
-To install from GitHub
-
-    # install.packages("devtools")
-    devtools::install_github("poissonconsulting/juggler")
+The most useful function for most people is likely `jg_check()`. Run this on JAGS model code to perform some basic checks such as balanced brackets and valid block, distribution and function names.
 
 Utilization
 -----------
 
-When presented with new code the first job is to use `jg_check` to see if the code has any problems which may be fixable using jg\_fix or may require manually editing. Once checked code can be combined with code fragments using `jg_juggle` to produce multiple models. If marked up using the MPAmpa syntax models can then be extended using `jg_extend` to produce fast, flexible code for passing to jaggernaut and/or for formatting using `jg_format` for your reports.
+When presented with new code the first job is to use `jg_check` to see if the code has any problems. Once checked code can be combined with code fragments using `jg_juggle` to produce multiple models. If marked up using the MPAmpa syntax models can then be extended using `jg_extend` to produce fast, flexible code for passing to jaggernaut and/or for formatting using `jg_format` for your reports.
 
 ``` r
 library(juggler)
@@ -66,3 +58,11 @@ jg_block_names(x)
 print(jg_check(x))
 #> [1] TRUE
 ```
+
+Installation
+------------
+
+To install from GitHub
+
+    # install.packages("devtools")
+    devtools::install_github("poissonconsulting/juggler")
