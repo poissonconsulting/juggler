@@ -3,12 +3,10 @@
 #' Checks JAGS model code
 #' 
 #' @param x string of JAGS model code
-#' @param extended flag of whether to allow extended BUGS language
 #' @return Invisible flag of whether JAGS model code passes certain checks.
 #' In addition, a unique warning is issued for each failed check.
 #' @export
-jg_check <- function(x, extended = FALSE) {
-  check_flag(extended)
+jg_check <- function(x) {
   x <- jg_rm_comments(x)
   
   flag <- TRUE
@@ -29,18 +27,13 @@ jg_check <- function(x, extended = FALSE) {
     flag <- FALSE
   }
   
-  if(!extended) {
-    anames <- c("data", "model")
-  } else
-    anames <- c("data", "model", "predict", "aggregate")
-  
-  if(any(!bnames %in% anames)) {
-    warning("invalid block names: ", paste_names(bnames[!bnames %in% anames], TRUE))
+  if(any(!bnames %in% jags_block_names())) {
+    warning("invalid block names: ", paste_names(bnames[!bnames %in% jags_block_names()], TRUE))
     flag <- FALSE
   } else {
-    fnames <- as.integer(factor(bnames, anames))
+    fnames <- as.integer(factor(bnames, jags_block_names()))
     if(is.unsorted(fnames)) {
-      warning("block order must be: ", paste_names(anames, TRUE))
+      warning("block order must be: ", paste_names(jags_block_names(), TRUE))
       flag <- FALSE
     }
   }

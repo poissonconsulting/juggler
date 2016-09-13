@@ -69,6 +69,4 @@ data {
   expect_warning(jg_check("model{} data{}"), "block order must be: 'data' and 'model'")
   expect_warning(jg_check("model{} data2{}"), "invalid block names: 'data2'")  
   expect_warning(jg_check("model{} predict{}"), "invalid block names: 'predict'")  
-  expect_true(jg_check("model{} predict{}", TRUE), "invalid block names: 'predict'")    
-  expect_warning(jg_check("predict{} model{}", TRUE), "block order must be: 'data', 'model', 'predict' and 'aggregate'")  
 })

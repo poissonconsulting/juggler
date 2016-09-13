@@ -1,4 +1,12 @@
-jags_distributions <- function () {
+#' JAGS Block Names
+#'
+#' @return A character vector of the permitted blocks names in
+#' their required order. 
+jags_block_names <- function() {
+  c("data", "model")
+}
+
+jags_distributions <- function() {
   dists <- c(
     "beta",
     "chisqr",
@@ -32,7 +40,7 @@ jags_distributions <- function () {
   dists
 }
 
-jags_functions <- function () {
+jags_functions <- function() {
   
   dists <- c("bern",
     "beta",
@@ -116,6 +124,6 @@ jags_functions <- function () {
   funcs
 }
 
-jags_reserved_words <- function () {
+jags_reserved_words <- function() {
   sort(c(jags_distributions(), jags_functions()))
 }
