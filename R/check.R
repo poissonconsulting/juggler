@@ -1,5 +1,5 @@
 check_string <- function (x) {
-  if(!is.character(x))
+if (!is.character(x))
     stop("x must be class character")
   
   if(!is.string(x)) {
@@ -19,9 +19,8 @@ check_string <- function (x) {
 #' In addition, a unique warning is issued for each failed check.
 #' @seealso \code{\link{juggler}}
 #' @export
-jg_check <- function (x, extended = FALSE) {
-  
-  assert_that(is.flag(extended) && noNA(extended))
+jg_check <- function(x, extended = FALSE) {
+  check_flag(extended)
   x <- jg_rm_comments(x)
   
   flag <- TRUE

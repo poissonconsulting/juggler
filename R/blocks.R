@@ -92,7 +92,7 @@ jg_block_names <- function (x) {
 #' print(x)
 #' @export
 "jg_block_names<-" <- function (x, value) {
-  assert_that(is.character(value))
+  check_vector(value, c(""))
   blocks <- jg_blocks(x)
   
   if(length(blocks) != length(value))

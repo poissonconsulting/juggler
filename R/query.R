@@ -83,13 +83,13 @@ get_line <- function (x, line) {
 #' jg_vnodes(model_code)
 #' 
 jg_vnodes <- function (x, type = "both", indices = FALSE, comment = "[$][^\n]+[$]") {
-  assert_that(is.string(type))
-  assert_that(is.flag(indices) && noNA(indices))
-  assert_that(is.string(comment))
+  check_string(type)
+  check_flag(indices)
+  check_string(comment)
   
   x_with_comments <- x
   x <- jg_rm_comments(x)
-
+  
   if(!type %in% c("both", "stochastic", "deterministic"))
     stop("type must be 'both', 'stochastic' or 'deterministic'")
   

@@ -22,7 +22,7 @@
 #' find uses for them.
 #' 
 #' @docType package
-#' @import assertthat datacheckr
+#' @import datacheckr
 #' @importFrom magrittr %<>% %>%
 #' @name juggler
 #' @aliases package-juggler juggler-package

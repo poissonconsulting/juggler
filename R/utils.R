@@ -1,5 +1,6 @@
 any_new_line <- function(x) stringr::str_detect(x, "\\n")
 any_comment <- function(x) stringr::str_detect(x, "#")
+is.string <- function(x) is.character(x) && length(x) == 1
 
 #' Reverse Strings
 #' 
@@ -26,8 +27,8 @@ reverse_strings <- function(x) {
 #' paste_names(c("x","y","z"), TRUE)
 #' @export
 paste_names <- function (x, quotes = FALSE) {
-  assert_that(is.flag(quotes) && noNA(quotes))
-  
+  check_flag(quotes)
+
   x <- paste0("'", paste0(x, collapse = "', '"), "'")
   x <- sub(",(?= '\\w+'$)", " and", x, perl = TRUE)
   x

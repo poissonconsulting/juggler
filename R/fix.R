@@ -11,8 +11,7 @@
 #' @seealso \code{\link{juggler}}
 #' @export
 jg_fix <- function (x, extended = FALSE) {
-  
-  assert_that(is.flag(extended) && noNA(extended))
+  check_flag(extended)
   x <- jg_rm_comments(x)
   
   if(!extended) {
