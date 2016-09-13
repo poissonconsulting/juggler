@@ -16,11 +16,8 @@ Imports:
     datacheckr,
     magrittr,
     stringr,
-    tulip (>= 0.0.14),
     whisker
 Suggests:
     testthat
-Remotes:
-    poissonconsulting/tulip
 LazyData: true
 RoxygenNote: 5.0.1
