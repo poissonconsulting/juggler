@@ -24,7 +24,4 @@ Strips out comments.
 jg_block_names(x) <- c("settings", "model")
 print(x)
 }
-\seealso{
-\code{\link{juggler}} and \code{\link{jg_blocks}}
-}
 

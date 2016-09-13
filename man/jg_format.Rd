@@ -21,7 +21,4 @@ Formats JAGS model code in the JAGS dialect of the BUGS language
 Note the juggler package currently requires that each relation
 be defined on a separate line of code.
 }
-\seealso{
-\code{\link{juggler}}
-}
 

@@ -18,7 +18,4 @@ Get block names in JAGS model code
 \examples{
 jg_block_names("data {X <- 2} model { Y ~ dpois(X) }")
 }
-\seealso{
-\code{\link{juggler}} and \code{\link{jg_blocks}}
-}
 

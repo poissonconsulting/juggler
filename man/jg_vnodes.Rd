@@ -40,8 +40,4 @@ model {
 jg_vnodes(model_code)
 
 }
-\seealso{
-\code{\link{juggler}}, \code{\link{jg_dists}}, 
-and \code{\link{jg_funcs}}
-}
 

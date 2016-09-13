@@ -8,7 +8,6 @@
 #' @param extended flag of whether to allow extended BUGS language.
 #' @return If successful a string of the fixed code. 
 #' If fails issues warning and returns FALSE.
-#' @seealso \code{\link{juggler}}
 #' @export
 jg_fix <- function (x, extended = FALSE) {
   check_flag(extended)

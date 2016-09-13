@@ -6,7 +6,6 @@
 #' 
 #' @param x string of JAGS model code
 #' @return JAGS model code stripped of comments as a string.
-#' @seealso \code{\link{juggler}}
 #' @export
 jg_rm_comments <- function (x) {
   x <- check_string(x)

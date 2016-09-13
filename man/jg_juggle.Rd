@@ -24,7 +24,4 @@ jg_juggle currently requires that each node be defined on
 a separate line of code. It takes advantage of the fact
 that each node is unique.
 }
-\seealso{
-\code{\link{juggler}}
-}
 

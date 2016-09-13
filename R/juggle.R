@@ -11,7 +11,6 @@
 #' @param x string of JAGS model code
 #' @param fragments A character vector of model fragments
 #' @return A character vector of alternative JAGS models.
-#' @seealso \code{\link{juggler}}
 #' @export
 jg_juggle <- function(x, fragments = character(0)) {
   check_vector(fragments, "", min_length = 0)

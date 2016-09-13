@@ -37,7 +37,6 @@ pass_blocks <- function (x, i) {
 #' @param x string of JAGS model code
 #' @return A named character vector where the names are the block names.
 #' Throws an error if the brackets are unbalanced.
-#' @seealso \code{\link{juggler}} and \code{\link{jg_blocks}}
 #' @examples
 #' jg_blocks("data {X <- 2} model { Y ~ dpois(X) }")
 #' @export
@@ -54,7 +53,6 @@ jg_blocks <- function (x) {
 #' 
 #' @param x string of JAGS model code
 #' @return Count of number of blocks.
-#' @seealso \code{\link{juggler}} and \code{\link{jg_blocks}}
 #' @examples
 #' jg_nblock("data {X <- 2} model { Y ~ dpois(X) }")
 #' @export
@@ -68,7 +66,6 @@ jg_nblock <- function (x) {
 #' 
 #' @param x string of JAGS model code
 #' @return A character vector of block names in order occur in code.
-#' @seealso \code{\link{juggler}} and \code{\link{jg_blocks}}
 #' @examples
 #' jg_block_names("data {X <- 2} model { Y ~ dpois(X) }")
 #' @export
@@ -85,7 +82,6 @@ jg_block_names <- function (x) {
 #' @param x string of JAGS model code
 #' @param value character vector of block names
 #' @return Modified JAGS model code.
-#' @seealso \code{\link{juggler}} and \code{\link{jg_blocks}}
 #' @examples
 #'  x <- "data {X <- 2} model { Y ~ dpois(X) }"
 #' jg_block_names(x) <- c("settings", "model")

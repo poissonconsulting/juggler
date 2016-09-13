@@ -17,7 +17,6 @@ if (!is.character(x))
 #' @param extended flag of whether to allow extended BUGS language
 #' @return Invisible flag of whether JAGS model code passes certain checks.
 #' In addition, a unique warning is issued for each failed check.
-#' @seealso \code{\link{juggler}}
 #' @export
 jg_check <- function(x, extended = FALSE) {
   check_flag(extended)

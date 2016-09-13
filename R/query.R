@@ -9,8 +9,6 @@
 #' @param x string of JAGS model code
 #' @return Sorted character vector of distributions
 #' that occur one or more times.
-#' @seealso \code{\link{juggler}}, 
-#' \code{\link{jg_funcs}}, \code{\link{jg_vnodes}}
 #' @export
 jg_dists <- function (x) {
   x <- jg_rm_comments(x)
@@ -32,8 +30,6 @@ jg_dists <- function (x) {
 #'  
 #' @param x string of JAGS model code
 #' @return Character vector of functions.
-#' @seealso \code{\link{juggler}}, \code{\link{jg_dists}}, 
-#' and \code{\link{jg_vnodes}}
 #' @export
 jg_funcs <- function (x) {
   x <- jg_rm_comments(x)
@@ -63,8 +59,6 @@ get_line <- function (x, line) {
 #' @param comment A string defining the regular expression to use to 
 #' filter text from the comment for the node.
 #' @return Character vector of unique sorted variable node names
-#' @seealso \code{\link{juggler}}, \code{\link{jg_dists}}, 
-#' and \code{\link{jg_funcs}}
 #' @export
 #' @examples
 #' model_code <- "data{

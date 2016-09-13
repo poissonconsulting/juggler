@@ -9,7 +9,6 @@
 #' @param x string of JAGS model code
 #' @return String of formatted model code or FALSE if fails 
 #' (in which case also gives a warning).
-#' @seealso \code{\link{juggler}}
 #' @export
 jg_format <- function (x) {
   
