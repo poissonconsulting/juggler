@@ -8,6 +8,8 @@ Authors@R: c(
 Description: Prototype checking and manipulation of JAGS model code 
     in the BUGS and extended BUGS languages.
 License: MIT + file LICENSE
+URL: https://github.com/poissonconsulting/juggler
+BugReports: https://github.com/poissonconsulting/juggler/issues
 Depends:
     R (>= 3.2.2)
 Imports:
@@ -16,5 +18,6 @@ Imports:
     stringr
 Suggests:
     testthat
+Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
