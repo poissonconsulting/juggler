@@ -1,32 +1,35 @@
 jags_distributions <- function () {
-  sort(c(
-    "dbeta",
-    "dchisqr",
-    "ddexp",
+  dists <- c(
+    "beta",
+    "chisqr",
     "dexp",
-    "df",
-    "dgamma",
-    "dgen.gamma",
-    "dlogis",
-    "dlnorm",
-    "dnchisqr",
-    "dnorm",
-    "dpar",
-    "dt",
-    "dunif",
-    "dweib",
-    "dbetabin",
-    "dbern",
-    "dbin",
-    "dcat",
-    "dhyper",
-    "dnegbin",
-    "dpois",
-    "ddirch",
-    "dmnorm",
-    "dwish",
-    "dmt",
-    "dmulti"))
+    "exp",
+    "f",
+    "gamma",
+    "gen.gamma",
+    "logis",
+    "lnorm",
+    "nchisqr",
+    "norm",
+    "par",
+    "t",
+    "unif",
+    "weib",
+    "betabin",
+    "bern",
+    "bin",
+    "cat",
+    "hyper",
+    "negbin",
+    "pois",
+    "dirch",
+    "mnorm",
+    "wish",
+    "mt",
+    "multi")
+  dists %<>% paste0("d", .)
+  dists %<>% sort()
+  dists
 }
 
 jags_functions <- function () {
@@ -51,7 +54,7 @@ jags_functions <- function () {
     "t",
     "weib")
   
-  sort(c(
+  funcs <- c(
     "abs",
     "arccos",
     "arccosh",
@@ -107,7 +110,10 @@ jags_functions <- function () {
     "dim",
     "for",
     "T", 
-    "in"))
+    "in")
+  
+  funcs %<>% sort()
+  funcs
 }
 
 jags_reserved_words <- function () {

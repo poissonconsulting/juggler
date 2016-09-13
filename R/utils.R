@@ -1,3 +1,4 @@
+. <- NULL
 any_new_line <- function(x) stringr::str_detect(x, "\\n")
 any_comment <- function(x) stringr::str_detect(x, "#")
 is.string <- function(x) is.character(x) && length(x) == 1
