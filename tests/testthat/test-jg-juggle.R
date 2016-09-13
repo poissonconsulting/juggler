@@ -10,3 +10,5 @@ test_that("jg_juggle returns original", {
 
   expect_identical(jg_juggle(model), model)
 })
+
+
