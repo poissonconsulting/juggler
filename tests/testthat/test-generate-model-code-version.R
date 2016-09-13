@@ -1,4 +1,4 @@
-context("replicate-model-codes")
+context("generate-model-code-version")
 
 model <- "model {
   for(i in 1:length(data)) {
@@ -16,8 +16,8 @@ result <-" model {
  } 
  } 
 " 
-test_that("replicate_model_codes", {
-  expect_identical(replicate_model_codes(model,fragments), result)
+test_that("test_generate_model_code_version", {
+  expect_identical(generate_model_code_version(model,fragments), result)
   
 })
   
