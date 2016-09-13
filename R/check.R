@@ -1,14 +1,3 @@
-check_string <- function (x) {
-if (!is.character(x))
-    stop("x must be class character")
-  
-  if(!is.string(x)) {
-    message("collapsing x into string")
-    x <- paste0(x, collapse = "\n")
-  }
-  x
-}
-
 #' Check JAGS model code
 #' 
 #' Checks JAGS model code

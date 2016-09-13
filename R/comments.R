@@ -8,7 +8,7 @@
 #' @return JAGS model code stripped of comments as a string.
 #' @export
 jg_rm_comments <- function (x) {
-  x <- check_string(x)
+  check_string(x)
   
   gsub("#[^\n]*(?=($|[\n]))", "", x, perl = TRUE)
 }
