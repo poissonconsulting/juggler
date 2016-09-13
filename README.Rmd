@@ -37,8 +37,7 @@ When presented with new code the first job is to use `jg_check` to see if the co
 Once checked code can be combined with code fragments using `jg_juggle` to
 produce multiple models. 
 If marked up using the MPAmpa syntax models can then be extended using
-`jg_extend` to produce fast, flexible code for passing to jaggernaut
-and/or for formatting using `jg_format` for your reports.
+`jg_extend` to produce fast, flexible code.
 
 ```{r}
 library(juggler)

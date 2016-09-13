@@ -1,13 +1,12 @@
 Package: juggler
-Title: Check, manipulate and format JAGS model code
+Title: Check and manipulate JAGS model code
 Version: 0.1.6.9000
 Date: 2016-09-13
 Authors@R: c(
     person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre")),
     person("Will", "Thorley", email = "will.thorley@gmail.com", role = c("aut")))
-Description: Prototype checking, manipulation and
-    formatting of JAGS model code in the BUGS
-    and extended BUGS languages.
+Description: Prototype checking and manipulation of JAGS model code 
+    in the BUGS and extended BUGS languages.
 License: MIT + file LICENSE
 Depends:
     R (>= 3.2.2)
