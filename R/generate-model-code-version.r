@@ -23,18 +23,20 @@ generate_model_code_version <- function(x, fragments) {
           {
           if(FragmentComponents[[frag]][2] == LineComponents[[1]][2])
           {
-            CurLine <- FragmentComponents[[frag]][1]
+            
+            if(is.na(LineComponents[[1]][5])) {
+              CurLine <- FragmentComponents[[frag]][1]
+            }
+            else {
+              CurLine <- paste(FragmentComponents[[frag]][1],LineComponents[[1]][5])
+            }
             break
           }
         }
       }
       
-      if(is.na(LineComponents[[1]][5])) {
-        Output <- paste(Output,paste(CurLine,"\n"))
-      }
-      else {
-        Output <- paste(Output,paste(CurLine,paste(LineComponents[[1]][5],"\n")))
-      }
+      Output <- paste(Output,paste(CurLine,"\n"))
+
     }
   Output
 }
