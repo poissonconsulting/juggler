@@ -13,5 +13,9 @@ replicate_model_codes <- function(x,fragments) {
     Output[[i+1]] <- generate_model_code_version(x,fragments[[i]])
   }
   
+  for(i in 1:length(Output)){
+    Output[[i]] %<>% specialise_model_and_prediction()
+  }
+  
   Output
 }
