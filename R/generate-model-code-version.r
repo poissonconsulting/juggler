@@ -28,7 +28,13 @@ generate_model_code_version <- function(x, fragments) {
           }
         }
       }
-      Output <- paste(Output,paste(CurLine,"\n"))
+      
+      if(is.na(LineComponents[[1]][5])) {
+        Output <- paste(Output,paste(CurLine,"\n"))
+      }
+      else {
+        Output <- paste(Output,paste(CurLine,paste(LineComponents[[1]][5],"\n")))
+      }
     }
   Output
 }
