@@ -8,8 +8,8 @@ specialise_model_and_prediction <- function(x) {
   
   RegStr = "#([pmaPMA]+)"
   
-  StateStack <- c("")
-  CurrentState <- ""
+  StateStack <- c("PM")
+  CurrentState <- "PM"
   
   ModelLines <- strsplit(x,"\\n")
   
