@@ -1,9 +1,11 @@
 
 GenModel  <-function()
 {
-  model <- "model{
-  y <- x^2
-  z <- x^3
+  model <- "model{ #PM
+for(i in 1:length(data)) { #P
+  y <- x^2 
+  z <- x^3 
+ }
 }" 
   model
 }
