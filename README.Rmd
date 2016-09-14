@@ -72,3 +72,7 @@ To install from GitHub
 # install.packages("devtools")
 devtools::install_github("poissonconsulting/juggler")
 ```
+
+## Inspiration
+
+- [Nimble](http://r-nimble.org)

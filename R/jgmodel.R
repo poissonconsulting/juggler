@@ -2,13 +2,20 @@ is.jgmodel <- function(x) {
   inherits(x, "jgmodel")
 }
 
+#' JG Model
+#'
+#' @param model_code A string or character vector of the model code.
+#'
+#' @return A jgmodel object
+#' @export
 jgmodel <- function(model_code) {
   check_vector(model_code, "")
-  model_code %<>% paste0(collapse = "\n")
   
-  x <- parse_model(model_code)
-  class(x) <- "jgmodel"
-  x
+  model_code %<>% collapse_vector_to_string()
+  model_code %<>% rm_comments()
+  
+  obj <- parse_model(model_code)
+  obj
 }
 
 nblocks <- function(x) {

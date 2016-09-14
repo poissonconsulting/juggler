@@ -1,10 +1,4 @@
-#' JAGS Block Names
-#'
-#' @return A character vector of the permitted blocks names in
-#' their required order. 
-jags_block_names <- function() {
-  c("data", "model")
-}
+block_names <- c("data", "model")
 
 jags_distributions <- function() {
   dists <- c(
