@@ -14,7 +14,8 @@ Depends:
 Imports:
     datacheckr,
     magrittr,
-    stringr
+    stringr,
+    methods
 Suggests:
     testthat
 LazyData: true

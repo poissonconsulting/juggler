@@ -16,5 +16,6 @@ jg_juggle <- function(x, fragments = character(0)) {
   check_vector(fragments, "", min_length = 0)
   jg_check(x)
   
+  #X %<>% replicate_model_codes(fragments)
   x
 }

@@ -1,20 +1,19 @@
 context("parse-node-lines")
 
 test_that("parse_node_lines", {
-  expect_identical(parse_node_lines("b ~ d"), 
-                   list(matrix(c("b ~ d", "b", "~", "d", ""), nrow = 1)))
+  expect_equal(parse_node_lines("b ~ d"), 
+                   frag_class$new(whole = "b ~ d", variable_name = "b", operator = "~", expression = "d", comment = ""))
   
-  expect_identical(parse_node_lines("b ~ d #Comment"), 
-                   list(matrix(c("b ~ d #Comment", "b", "~", "d ", "#Comment"), nrow = 1)))
+  expect_equal(parse_node_lines("b ~ d #Comment"), 
+               frag_class$new(whole = "b ~ d #Comment", variable_name = "b", operator = "~", expression = "d ", comment = "#Comment"))
   
-  expect_identical(parse_node_lines("b <- d"), 
-                   list(matrix(c("b <- d", "b", "<-", "d", ""), nrow = 1)))
+  expect_equal(parse_node_lines("b <- d"), 
+                   frag_class$new(whole = "b <- d", variable_name = "b", operator = "<-", expression = "d", comment = ""))
   
-  expect_identical(parse_node_lines("b <- d #Comment"), 
-                   list(matrix(c("b <- d #Comment", "b", "<-", "d ", "#Comment"), nrow = 1)))
+  expect_equal(parse_node_lines("b <- d #Comment"), 
+                   frag_class$new(whole = "b <- d #Comment", variable_name = "b", operator = "<-", expression = "d ", comment = "#Comment"))
   
-  expect_identical(parse_node_lines("b[i] <- d #Comment"), 
-                   list(matrix(c("b[i] <- d #Comment", "b[i]", "<-", "d ", "#Comment"), nrow = 1)))
+  expect_equal(parse_node_lines("b[i] <- d #Comment"), 
+                   frag_class$new(whole = "b[i] <- d #Comment", variable_name = "b[i]", operator = "<-", expression = "d ", comment = "#Comment"))
   
 })
-  

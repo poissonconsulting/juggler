@@ -30,13 +30,14 @@ model_code_class <- setRefClass(model_code_class_name,
                                 CurLine <- ModelLines[[1]][line]
                                 append_line(CurLine) 
                               }
-                              
+                              CurrentState <<- DefaultState
+                              StateStack <<- list()
                             },
                             initialise = function(){
                               model <<- ""
                               prediction <<- ""
                               CurrentState <<- DefaultState
-                              StateStack[[1]] <<- DefaultState
+                              StateStack <<- list()
                             },
                             append_line = function(CurLine){
                               up_scope_update(CurLine)
@@ -47,37 +48,55 @@ model_code_class <- setRefClass(model_code_class_name,
                             },
                             up_scope_update = function(CurLine){
                               braces <- findInString("\\{",CurLine)
-                                 for(i in 1:braces){ push_state() 
-                                   }
+                              #print(braces)
+                              if(braces>0){
+                                 for(i in 1:braces){ push_state() }
+                              }
                             },
                             down_scope_update = function(CurLine){
                               braces <- findInString("\\}",CurLine)
-                              for(i in 1:braces){ pop_state() }
+                              #print(braces)
+                              if(braces>0){
+                                for(i in 1:braces){ pop_state() }
+                              }
                             },
                             get_command_string = function(CurLine){
                               CommandString <- stringr::str_match(CurLine,RegStr)
                               CommandString
                             },
                             update_state = function(CommandString){
-                              if(findInString("P|M",CommandString)) {
-                                CurrentState <<- EmptyFlag
-                                if(findInString("P",CommandString)) { CurrentState <<- CurrentState+PredictionFlag }
-                                if(findInString("M",CommandString)) { CurrentState <<- CurrentState+ModelFlag }
+                              if(findInString("P|M",CommandString)>0) {
+                                CurrentState <<- 0L
+                                if(findInString("P",CommandString)>0) { CurrentState <<- CurrentState+PredictionFlag }
+                                if(findInString("M",CommandString)>0) { CurrentState <<- CurrentState+ModelFlag }
+                                #print("Current State")
+                                #print(CurrentState)
                               }
                             },
                             update_code = function(CurLine,CommandString) {
-                              if(findInString("p",CommandString) || bitwAnd(CurrentState,PredictionFlag)>0) {
+                              
+                              pline <- findInString("p",CommandString)>0
+                              mline <- findInString("m",CommandString)>0
+                              
+                              pstate <-bitwAnd(CurrentState,PredictionFlag) > 0
+                              mstate <- bitwAnd(CurrentState,ModelFlag) > 0
+                                
+                              stateline <- pline|mline
+                              
+                              if(pline | (!stateline & pstate)) {
                                 prediction <<- paste(prediction,paste(CurLine,"\n"))
                               }
-                              if(findInString("m",CommandString) || bitwAnd(CurrentState,ModelFlag) > 0) {
+                              if(mline | (!stateline & mstate)) {
                                 model <<- paste(model,paste(CurLine,"\n"))
                               }
                             },
                             push_state = function(){
+                              #print("Push")
                               StateStack[[length(StateStack)+1]] <<- CurrentState
                             },
                             pop_state=function(){
                               if(length(StateStack) > 0){
+                               # print("pop")
                                 CurrentState <<- StateStack[[length(StateStack)]]
                                 StateStack[[length(StateStack)]] <<- NULL
                               }
