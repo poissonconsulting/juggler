@@ -20,11 +20,11 @@ DefaultState <- AllFlag
 model_code_class <- R6Class(
   model_code_class_name,
   public = list(
-    initialize = function(model = "", prediction = ""){
+    initialize = function(model = "", prediction = "", CurrentState = DefaultState, StateStack = list()){
       private$vmodel <- model
       private$vprediction <- prediction
-      private$CurrentState <- DefaultState
-      private$StateStack <- list()
+      private$CurrentState <- CurrentState
+      private$StateStack <- StateStack
     },
     generate_code = function(x) {
       self$clear()
@@ -33,14 +33,14 @@ model_code_class <- R6Class(
         CurLine <- ModelLines[[1]][line]
         self$append_line(CurLine) 
       }
-      CurrentState <<- DefaultState
-      StateStack <<- list()
+      private$CurrentState <<- DefaultState
+      private$StateStack <<- list()
     },
     clear = function(){
-      vmodel <<- ""
-      vprediction <<- ""
-      CurrentState <<- DefaultState
-      StateStack <<- list()
+      private$vmodel <<- ""
+      private$vprediction <<- ""
+      private$CurrentState <<- DefaultState
+      private$StateStack <<- list()
     },
     append_line = function(CurLine){
       private$up_scope_update(CurLine)
@@ -74,9 +74,9 @@ model_code_class <- R6Class(
   },
   update_state = function(CommandString){
     if(findInString("P|M",CommandString)>0) {
-      CurrentState <<- 0L
-      if(findInString("P",CommandString)>0) { CurrentState <<- CurrentState+PredictionFlag }
-      if(findInString("M",CommandString)>0) { CurrentState <<- CurrentState+ModelFlag }
+      private$CurrentState <<- 0L
+      if(findInString("P",CommandString)>0) { private$CurrentState <<- private$CurrentState+PredictionFlag }
+      if(findInString("M",CommandString)>0) { private$CurrentState <<- private$CurrentState+ModelFlag }
     }
   },
   update_code = function(CurLine,CommandString) {
@@ -84,33 +84,33 @@ model_code_class <- R6Class(
     pline <- findInString("p",CommandString)>0
     mline <- findInString("m",CommandString)>0
     
-    pstate <-bitwAnd(CurrentState,PredictionFlag) > 0
-    mstate <- bitwAnd(CurrentState,ModelFlag) > 0
+    pstate <-bitwAnd(private$CurrentState,PredictionFlag) > 0
+    mstate <- bitwAnd(private$CurrentState,ModelFlag) > 0
     
     stateline <- pline|mline
     
     if(pline | (!stateline & pstate)) {
-      vprediction <<- paste(vprediction,paste(CurLine,"\n"))
+      private$vprediction <<- paste(private$vprediction,paste(CurLine,"\n"))
     }
     if(mline | (!stateline & mstate)) {
-      vmodel <<- paste(vmodel,paste(CurLine,"\n"))
+      private$vmodel <<- paste(private$vmodel,paste(CurLine,"\n"))
     }
   },
   push_state = function(){
-    StateStack[[length(StateStack)+1]] <<- CurrentState
+    private$StateStack[[length(private$StateStack)+1]] <<- private$CurrentState
   },
   pop_state=function(){
-    if(length(StateStack) > 0){
-      CurrentState <<- StateStack[[length(StateStack)]]
-      StateStack[[length(StateStack)]] <<- NULL
+    if(length(private$StateStack) > 0){
+      private$CurrentState <<- private$StateStack[[length(private$StateStack)]]
+      private$StateStack[[length(private$StateStack)]] <<- NULL
     }
   }),
   active = list(
     model = function() {
-      vmodel
+      private$vmodel
     },
     prediction = function() {
-      vprediction
+      private$vprediction
     })
 )
 

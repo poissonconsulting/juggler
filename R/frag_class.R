@@ -23,21 +23,19 @@ frag_class <- R6Class(
     },
     is_match = function(fragment){
       "Checks whether the Model Code Fragment supplied is a matching fragment. Just checks variable_name"
-      if(class(fragment) != model_code_fragment_class_name)
-        stop(paste(model_code_fragment_class_name," is required type for method matches"))
-      result <- fragment$vvariable_name == vvariable_name
+      result <- all(fragment$variable_name == private$vvariable_name)
       result
     },
     
     is_valid  = function(){
       "returns a logical value representing if this is a valid Model Code Fragment"
-      result <- !is.na(vwhole)
+      result <- !is.na(private$vwhole)
       result
     },
     
     has_comment = function(){
       "returns a logical value representing if this contains a valid comment field"
-      result <- !is.na(vcomment)
+      result <- !is.na(private$vcomment)
       result
     }),
   private = list(
@@ -48,18 +46,18 @@ frag_class <- R6Class(
     vcomment =  NULL),
   active = list(
     comment = function(){
-      vcomment
+      private$vcomment
     },
     whole = function(){
-      vwhole
+      private$vwhole
     },
     variable_name = function(){
-      vvariable_name
+      private$vvariable_name
     },
     expression = function(){
-      vexpression
+      private$vexpression
     },
     operator = function(){
-      voperator
+      private$voperator
     })
 )
