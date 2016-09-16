@@ -1,4 +1,3 @@
-#' @import datacheckr
+#' @import datacheckr R6
 #' @importFrom magrittr %<>% %>%
-#' @importFrom methods new
 NULL

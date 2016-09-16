@@ -15,7 +15,8 @@ Imports:
     datacheckr,
     magrittr,
     stringr,
-    methods
+    methods,
+    R6
 Suggests:
     testthat
 LazyData: true

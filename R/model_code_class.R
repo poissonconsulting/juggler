@@ -14,96 +14,105 @@ DefaultState <- AllFlag
 
 #' Model Code class
 #'
+#' @field model Contains a string representation of the vmodel version of the Model Code
+#' @field prediction Contains a string representation of the vprediction version of the Model Code
 #' @export
-model_code_class <- setRefClass(model_code_class_name,
-                          fields = list(
-                            model = "character",
-                            prediction = "character",
-                            StateStack = "list",
-                            CurrentState = "numeric"),
-                          methods = list(
-                            generate_code = function(x)
-                            {
-                              initialise()
-                              ModelLines <- strsplit(x,"\\n")
-                              for(line in 1:length(ModelLines[[1]])){
-                                CurLine <- ModelLines[[1]][line]
-                                append_line(CurLine) 
-                              }
-                              CurrentState <<- DefaultState
-                              StateStack <<- list()
-                            },
-                            initialise = function(){
-                              model <<- ""
-                              prediction <<- ""
-                              CurrentState <<- DefaultState
-                              StateStack <<- list()
-                            },
-                            append_line = function(CurLine){
-                              up_scope_update(CurLine)
-                              CommandString <- get_command_string(CurLine)
-                              update_state(CommandString)
-                              update_code(CurLine,CommandString)
-                              down_scope_update(CurLine)
-                            },
-                            up_scope_update = function(CurLine){
-                              braces <- findInString("\\{",CurLine)
-                              #print(braces)
-                              if(braces>0){
-                                 for(i in 1:braces){ push_state() }
-                              }
-                            },
-                            down_scope_update = function(CurLine){
-                              braces <- findInString("\\}",CurLine)
-                              #print(braces)
-                              if(braces>0){
-                                for(i in 1:braces){ pop_state() }
-                              }
-                            },
-                            get_command_string = function(CurLine){
-                              CommandString <- stringr::str_match(CurLine,RegStr)
-                              CommandString
-                            },
-                            update_state = function(CommandString){
-                              if(findInString("P|M",CommandString)>0) {
-                                CurrentState <<- 0L
-                                if(findInString("P",CommandString)>0) { CurrentState <<- CurrentState+PredictionFlag }
-                                if(findInString("M",CommandString)>0) { CurrentState <<- CurrentState+ModelFlag }
-                                #print("Current State")
-                                #print(CurrentState)
-                              }
-                            },
-                            update_code = function(CurLine,CommandString) {
-                              
-                              pline <- findInString("p",CommandString)>0
-                              mline <- findInString("m",CommandString)>0
-                              
-                              pstate <-bitwAnd(CurrentState,PredictionFlag) > 0
-                              mstate <- bitwAnd(CurrentState,ModelFlag) > 0
-                                
-                              stateline <- pline|mline
-                              
-                              if(pline | (!stateline & pstate)) {
-                                prediction <<- paste(prediction,paste(CurLine,"\n"))
-                              }
-                              if(mline | (!stateline & mstate)) {
-                                model <<- paste(model,paste(CurLine,"\n"))
-                              }
-                            },
-                            push_state = function(){
-                              #print("Push")
-                              StateStack[[length(StateStack)+1]] <<- CurrentState
-                            },
-                            pop_state=function(){
-                              if(length(StateStack) > 0){
-                               # print("pop")
-                                CurrentState <<- StateStack[[length(StateStack)]]
-                                StateStack[[length(StateStack)]] <<- NULL
-                              }
-                            }
-                            )
+model_code_class <- R6Class(
+  model_code_class_name,
+  public = list(
+    initialize = function(model = "", prediction = ""){
+      private$vmodel <- model
+      private$vprediction <- prediction
+      private$CurrentState <- DefaultState
+      private$StateStack <- list()
+    },
+    generate_code = function(x) {
+      self$clear()
+      ModelLines <- strsplit(x,"\\n")
+      for(line in 1:length(ModelLines[[1]])){
+        CurLine <- ModelLines[[1]][line]
+        self$append_line(CurLine) 
+      }
+      CurrentState <<- DefaultState
+      StateStack <<- list()
+    },
+    clear = function(){
+      vmodel <<- ""
+      vprediction <<- ""
+      CurrentState <<- DefaultState
+      StateStack <<- list()
+    },
+    append_line = function(CurLine){
+      private$up_scope_update(CurLine)
+      CommandString <- private$get_command_string(CurLine)
+      private$update_state(CommandString)
+      private$update_code(CurLine,CommandString)
+      private$down_scope_update(CurLine)
+    }),
+  
+  private = list(
+    vmodel = "",
+    vprediction = "",
+    StateStack = list(),
+    CurrentState = DefaultState,
+  
+  up_scope_update = function(CurLine){
+    braces <- findInString("\\{",CurLine)
+    if(braces>0){
+      for(i in 1:braces){ private$push_state() }
+    }
+  },
+  down_scope_update = function(CurLine){
+    braces <- findInString("\\}",CurLine)
+    if(braces>0){
+      for(i in 1:braces){ private$pop_state() }
+    }
+  },
+  get_command_string = function(CurLine){
+    CommandString <- stringr::str_match(CurLine,RegStr)
+    CommandString
+  },
+  update_state = function(CommandString){
+    if(findInString("P|M",CommandString)>0) {
+      CurrentState <<- 0L
+      if(findInString("P",CommandString)>0) { CurrentState <<- CurrentState+PredictionFlag }
+      if(findInString("M",CommandString)>0) { CurrentState <<- CurrentState+ModelFlag }
+    }
+  },
+  update_code = function(CurLine,CommandString) {
+    
+    pline <- findInString("p",CommandString)>0
+    mline <- findInString("m",CommandString)>0
+    
+    pstate <-bitwAnd(CurrentState,PredictionFlag) > 0
+    mstate <- bitwAnd(CurrentState,ModelFlag) > 0
+    
+    stateline <- pline|mline
+    
+    if(pline | (!stateline & pstate)) {
+      vprediction <<- paste(vprediction,paste(CurLine,"\n"))
+    }
+    if(mline | (!stateline & mstate)) {
+      vmodel <<- paste(vmodel,paste(CurLine,"\n"))
+    }
+  },
+  push_state = function(){
+    StateStack[[length(StateStack)+1]] <<- CurrentState
+  },
+  pop_state=function(){
+    if(length(StateStack) > 0){
+      CurrentState <<- StateStack[[length(StateStack)]]
+      StateStack[[length(StateStack)]] <<- NULL
+    }
+  }),
+  active = list(
+    model = function() {
+      vmodel
+    },
+    prediction = function() {
+      vprediction
+    })
 )
-
 
 findInString <- function(Character,String){
   logical <- sum(grepl(Character,String))
