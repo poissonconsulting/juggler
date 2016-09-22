@@ -17,6 +17,6 @@ result <-" model {
  } 
 " 
 test_that("test_generate_model_code_version", {
-  expect_identical(generate_model_code_version(model,fragments), result)
+  expect_identical(jg_generate_modelcode(model,fragments), result)
   })
   

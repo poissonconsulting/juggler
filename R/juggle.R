@@ -15,6 +15,6 @@
 jg_juggle <- function(x, fragments = character(0)) {
   jg_check(x)
   
-  x %<>% replicate_model_codes(fragments)
+  x %<>% jg_replicate_modelcode(fragments)
   x
 }

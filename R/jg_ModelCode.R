@@ -1,5 +1,14 @@
 
-model_code_class_name <-"Model_Code"
+#' Is jg_ModelCode
+#'
+#' Tests whether x is an object of class \code{\link{jg_ModelCode}}.
+#'
+#' @param x The object to test.
+#' @return A flag indicating whether the test was positive.
+#' @export
+is.jg_ModelCode <- function(x) {
+  inherits(x, "R6") && inherits(x, "jg_ModelCode")
+}
 
 RegStr = "#([pmaPMA]+)"
 
@@ -17,8 +26,8 @@ DefaultState <- AllFlag
 #' @field model Contains a string representation of the vmodel version of the Model Code
 #' @field prediction Contains a string representation of the vprediction version of the Model Code
 #' @export
-model_code_class <- R6Class(
-  model_code_class_name,
+jg_ModelCode <- R6Class(
+  "jg_ModelCode",
   public = list(
     initialize = function(model = "", prediction = "", CurrentState = DefaultState){
       private$vmodel <- model
@@ -86,12 +95,6 @@ model_code_class <- R6Class(
     mstate <- any(bitwAnd(as.integer(private$StateStack$State),ModelFlag)>0)
     
     stateline <- pline|mline
-    
-    #print(pline)
-    #print(mline)
-    #print(pstate)
-    #print(mstate)
-    #print(stateline)
     
     if(pline | (!stateline & pstate)) {
       private$vprediction <<- paste(private$vprediction,paste(CurLine,"\n"))
