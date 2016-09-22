@@ -20,27 +20,25 @@ DefaultState <- AllFlag
 model_code_class <- R6Class(
   model_code_class_name,
   public = list(
-    initialize = function(model = "", prediction = "", CurrentState = DefaultState, StateStack = list()){
+    initialize = function(model = "", prediction = "", CurrentState = DefaultState){
       private$vmodel <- model
       private$vprediction <- prediction
-      private$CurrentState <- CurrentState
-      private$StateStack <- StateStack
+      private$StateStack <- state_stack_class$new(CurrentState)
     },
     generate_code = function(x) {
       self$clear()
       ModelLines <- strsplit(x,"\\n")
-      for(line in 1:length(ModelLines[[1]])){
-        CurLine <- ModelLines[[1]][line]
+      ModelLines <- ModelLines[[1]]
+      for(line in 1:length(ModelLines)){
+        CurLine <- ModelLines[line]
         self$append_line(CurLine) 
       }
-      private$CurrentState <<- DefaultState
-      private$StateStack <<- list()
+      private$StateStack <<- state_stack_class$new(DefaultState)
     },
     clear = function(){
       private$vmodel <<- ""
       private$vprediction <<- ""
-      private$CurrentState <<- DefaultState
-      private$StateStack <<- list()
+      private$StateStack <<- state_stack_class$new(DefaultState)
     },
     append_line = function(CurLine){
       private$up_scope_update(CurLine)
@@ -53,19 +51,18 @@ model_code_class <- R6Class(
   private = list(
     vmodel = "",
     vprediction = "",
-    StateStack = list(),
-    CurrentState = DefaultState,
+    StateStack = NULL,
   
   up_scope_update = function(CurLine){
     braces <- findInString("\\{",CurLine)
     if(braces>0){
-      for(i in 1:braces){ private$push_state() }
+      for(i in 1:braces){ private$StateStack$push() }
     }
   },
   down_scope_update = function(CurLine){
     braces <- findInString("\\}",CurLine)
     if(braces>0){
-      for(i in 1:braces){ private$pop_state() }
+      for(i in 1:braces){ private$StateStack$pop() }
     }
   },
   get_command_string = function(CurLine){
@@ -74,35 +71,33 @@ model_code_class <- R6Class(
   },
   update_state = function(CommandString){
     if(findInString("P|M",CommandString)>0) {
-      private$CurrentState <<- 0L
-      if(findInString("P",CommandString)>0) { private$CurrentState <<- private$CurrentState+PredictionFlag }
-      if(findInString("M",CommandString)>0) { private$CurrentState <<- private$CurrentState+ModelFlag }
+      NewState <- 0L
+      if(findInString("P",CommandString)>0) { NewState <- NewState+PredictionFlag }
+      if(findInString("M",CommandString)>0) { NewState <- NewState+ModelFlag }
+      private$StateStack$State <<-NewState
     }
   },
   update_code = function(CurLine,CommandString) {
     
-    pline <- findInString("p",CommandString)>0
-    mline <- findInString("m",CommandString)>0
+    pline <- any(findInString("p",CommandString)>0)
+    mline <- any(findInString("m",CommandString)>0)
     
-    pstate <-bitwAnd(private$CurrentState,PredictionFlag) > 0
-    mstate <- bitwAnd(private$CurrentState,ModelFlag) > 0
+    pstate <-any(bitwAnd(as.integer(private$StateStack$State),PredictionFlag) > 0)
+    mstate <- any(bitwAnd(as.integer(private$StateStack$State),ModelFlag)>0)
     
     stateline <- pline|mline
+    
+    #print(pline)
+    #print(mline)
+    #print(pstate)
+    #print(mstate)
+    #print(stateline)
     
     if(pline | (!stateline & pstate)) {
       private$vprediction <<- paste(private$vprediction,paste(CurLine,"\n"))
     }
     if(mline | (!stateline & mstate)) {
       private$vmodel <<- paste(private$vmodel,paste(CurLine,"\n"))
-    }
-  },
-  push_state = function(){
-    private$StateStack[[length(private$StateStack)+1]] <<- private$CurrentState
-  },
-  pop_state=function(){
-    if(length(private$StateStack) > 0){
-      private$CurrentState <<- private$StateStack[[length(private$StateStack)]]
-      private$StateStack[[length(private$StateStack)]] <<- NULL
     }
   }),
   active = list(
@@ -111,7 +106,8 @@ model_code_class <- R6Class(
     },
     prediction = function() {
       private$vprediction
-    })
+    }
+    )
 )
 
 findInString <- function(Character,String){

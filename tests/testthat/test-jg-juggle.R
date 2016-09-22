@@ -25,7 +25,6 @@ result4 <- model_code_class$new(model = "  model{ #PM  \n  z[i] <- x^3 #mp  \n  
                                 prediction = "  model{ #PM  \n  for(i in 1:length(data)) { #P  \n  y[i] <- x[i]^2   \n  z[i] <- x^3 #mp  \n  }  \n  }  \n")
 
 result <- list(result1,result2,result3,result4)
-
 test_that("test_jg_juggle", {
   expect_equal(jg_juggle(model,fragments), result)
 })
