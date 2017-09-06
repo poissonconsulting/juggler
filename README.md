@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/poissonconsulting/juggler.svg)](https://travis-ci.org/poissonconsulting/juggler)
+[![stability-deprecated](https://img.shields.io/badge/stability-deprecated-red.svg)](https://github.com/joethorley/stability-badges#deprecated)
 
 # juggler
 
