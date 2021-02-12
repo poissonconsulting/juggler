@@ -1,5 +1,6 @@
-[![stability-deprecated](https://img.shields.io/badge/stability-deprecated-red.svg)](https://github.com/joethorley/stability-badges#deprecated)
-
+<!-- badges: start -->
+[![Lifecycle: deprecated](https://img.shields.io/badge/lifecycle-deprecated-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#deprecated)
+<!-- badges: end -->
 # juggler
 
 ## Overview
